@@ -1,0 +1,369 @@
+\chapter{提案手法}
+\label{chap:approach}
+本研究の目的は，物体の表面特徴量を使用して点の明度や密度の制御により，
+物体の特徴を最大限に引き出した描画を実現することである．
+しかしLPSDを使用しながら点の明度や密度を決定するにはたいへんな手間や時間が
+かかるため，PC上で事前にシミュレーションを行う．
+まず表示したい物体のポリゴンモデルから表面特徴量を算出し，
+LPSD描画用の一筆書き点列データを作成する．
+その後ポリゴンモデルの表面特徴量を参照することで，
+一筆書き点列データの各点における明度・密度を決定する．
+
+本章では各ステップでの操作について詳しく説明していく．
+まず\ref{sec:app_surfacedescriptor}節では物体の表面特徴量算出方法を示し，
+\ref{sec:app_curvature}項～\ref{sec:app_meshsaliency}項で
+本研究で使用する特徴量である曲率，大局的な情報を用いる曲率，
+Tangent Sphere Intersection Value (TSIV)，
+mesh saliencyの算出方法について記述する．
+\ref{sec:app_output}節では，
+特徴量算出に用いたポリゴンモデルをディスプレイで描画可能な
+ファイル形式に変換する方法を示す．
+\ref{sec:app_resampling}項では一筆書き点列のリサンプリングについて，
+\ref{sec:app_returnroute}項では一筆書きの終点から始点への戻り経路追加について
+それぞれ説明する．
+\ref{sec:app_transfer}節では，算出された表面特徴量と描画用一筆書きデータを用いて
+各点の明るさを決定する方法について記述する．
+\ref{sec:app_intensity}項では明るさの変更について，
+\ref{sec:app_density}項では密度の変更について
+述べる．
+また\ref{sec:app_surfacedescriptor}節～\ref{sec:app_transfer}節で示される
+処理を実現するソフトウェアについて，\ref{sec:app_simulator}節で説明する．
+
+\section{描画したい物体の表面特徴量算出}\label{sec:app_surfacedescriptor}
+描画対象とする物体の3次元ポリゴンモデルに対し，次の8つの特徴量を算出する．
+これにより，表示する物体に合わせて特徴量を選択することが可能となる．
+
+\subsection{曲率}\label{sec:app_curvature}
+本論文では，まずGoldfeatherらの手法\cite{Goldfeather04}を用いて
+主曲率を算出し，2つの主曲率の値からガウス曲率と平均曲率を算出する．
+
+\textgt{図 \ref{fig:goldfeather}}のように，
+物体表面上のある点を${\bf p}$，頂点法線を${\bf N}_{{\bf p}}$とし，
+${\bf p}$に隣接する$n$個の頂点を${\bf q}_{1}, {\bf q}_{2}, \cdots, {\bf q}_{n}$とおく．
+また各${\bf q}_{i}$から${\bf p}$への変位ベクトル${\bf q}_{i}-{\bf p}$を
+点${\bf p}$の接平面に射影したベクトルを${\bf y}_{i}$，
+${\bf p}$における${\bf q}_{i}$方向の曲率を$\kappa_{{\bf y}_{i}}$とおくと，
+曲率テンソル${\bf W}$に関する次の式が成り立つ：
+
+%\vspace{1ex}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=6cm]{fig/Goldfeather.eps}
+	\textgt{\caption{ある点に隣接する頂点の位置を用いて主曲率を近似する
+	文献\cite{Goldfeather04}の手法 \label{fig:goldfeather}}}
+\end{figure}
+
+\vspace{-1ex}
+\begin{equation}\label{eq:GF1} 
+\kappa_{{\bf y}_{i}} = {\bf y}_{i}^{T}{\bf Wy}_{i}
+\end{equation}
+\vspace{0.2ex}
+
+\noindent
+Goldfeatherらは${\bf N}_{{\bf p}}$と${\bf y}_{i}$から主曲率を
+近似できるとしており，
+このときの各曲率の近似値$\kappa_{{\bf y}_{i}}'$は，
+
+\vspace{-1ex}
+\begin{equation}\label{eq:GF2} 
+\kappa_{{\bf y}_{i}}' =
+2 \frac{({\bf p}-{\bf q}_{i}) \cdot {\bf N_{p}}}{({\bf p}-{\bf q}_{i})\cdot({\bf p}-{\bf q}_{i})}
+\end{equation}
+\vspace{0.5ex}
+
+\noindent
+という式で求めることができる．
+これはすべての頂点${\bf q}_{i}$について成り立つので，
+式(\ref{eq:GF1})，式(\ref{eq:GF2})から次のような
+$n$個の式が成立することとなる．
+
+\vspace{-1ex}
+\begin{equation}\label{eq:GF3} 
+{\bf y}_{i}^{T}{\bf Wy}_{i} = \kappa_{{\bf y}_{i}}' (i=1,2,\cdots,n)
+\end{equation}
+\vspace{0.5ex}
+
+\noindent
+ここで曲率テンソルは二次対称行列であるので
+
+\vspace{-1ex}
+\begin{equation}\label{eq:GF4} 
+{\bf W} = \left(
+\begin{array}{cc}
+a & b\\
+b & c\\
+\end{array} 
+\right)
+\end{equation}
+\vspace{0.5ex}
+
+\noindent
+とおき，各変位ベクトル${\bf y}_{i}$を局所座標系${\bf u}$, ${\bf v}$で表すと
+
+\vspace{-1ex}
+\begin{equation}\label{eq:GF5} 
+{\bf y}_{i} = (u_{i}, v_{i})
+\end{equation}
+\vspace{0.2ex}
+
+\noindent
+となる．
+式(\ref{eq:GF4})，式(\ref{eq:GF5})を式(\ref{eq:GF3})に代入すると，
+
+\vspace{-1ex}
+\begin{eqnarray}\label{eq:GF6} 
+{\bf y}_{i}^{T}{\bf Wy}_{i} &=& \left(u_{i}, v_{i} \right)
+\left(
+\begin{array}{cc}
+a & b\\
+b & c\\
+\end{array} 
+\right)
+\left(
+\begin{array}{c}
+u_{i} \\
+v_{i} \\
+\end{array} 
+\right) \nonumber \\
+&=&
+\left(u_{i}^{2}, 2u_{i}v_{i}, v_{i}^{2} \right)
+\left(
+\begin{array}{c}
+a\\
+b\\
+c\\
+\end{array} 
+\right)
+=\kappa_{{\bf y}_{i}}'
+\nonumber
+\end{eqnarray}
+\vspace{0.2ex}
+
+\noindent
+という式が導ける．
+この式は$n$個の頂点について成立するので，次の方程式が
+成り立つ：
+
+\vspace{-1ex}
+\begin{equation}\label{eq:GF7} 
+\left(
+\begin{array}{ccc}
+u_{1}^{2} & 2u_{1}v_{1}& v_{1}^{2}\\
+\vdots & \vdots & \vdots \\
+u_{i}^{2} & 2u_{i}v_{i}& v_{i}^{2}\\
+\vdots & \vdots & \vdots \\
+u_{n}^{2} & 2u_{n}v_{n}& v_{n}^{2}\\
+\end{array} 
+\right)
+\left(
+\begin{array}{c}
+a \\
+b \\
+c \\
+\end{array} 
+\right)
+=
+\left(
+\begin{array}{c}
+\kappa_{{\bf y}_{1}}' \\
+\vdots \\
+\kappa_{{\bf y}_{i}}' \\
+\vdots \\
+\kappa_{{\bf y}_{n}}' \\
+\end{array} 
+\right)
+\nonumber
+\end{equation}
+\vspace{0.5ex}
+
+この連立方程式を最小二乗法で解く．$n$個の式における
+二乗誤差の和を$E(a,b,c)$とおくと
+
+\vspace{-1ex}
+\begin{equation}\label{eq:GF8} 
+E(a,b,c) = 
+\sum^n_{i=1}
+\left[
+\left(
+\begin{array}{ccc}
+u_{1}^{2} & 2u_{1}v_{1}& v_{1}^{2} \\
+\end{array}
+\right)
+\left( 
+\begin{array}{c}
+a \\
+b \\
+c \\
+\end{array}
+\right) 
+- \kappa_{{\bf y}_{i}}'
+\right]
+^{2}
+\nonumber
+\end{equation}
+\vspace{0.5ex}
+
+\noindent
+このとき$E(a,b,c)$を最小にする以下の
+偏微分方程式が成り立つ．
+
+\vspace{-1ex}
+\begin{equation}\label{eq:GF9} 
+\frac{\partial E(a,b,c)}{\partial a}=0,\frac{\partial E(a,b,c)}{\partial c}=0,
+\frac{\partial E(a,b,c)}{\partial c}=0
+\end{equation}
+\vspace{0.5ex}
+
+\noindent
+ここで式(\ref{eq:GF9})の係数から次の三元連立一次方程式が成り立ち，
+これを解くことで$a,b,c$が求まる．
+
+\subsection{大局的な曲率}\label{sec:app_multiscalecurvature}
+
+\subsection{TSIV}\label{sec:app_tsiv}
+
+\subsection{mesh saliency}\label{sec:app_meshsaliency}
+
+\section{描画用ファイルの作成}\label{sec:app_output}
+
+\subsection{点のリサンプリング}\label{sec:app_resampling}
+
+\subsection{一筆書きの戻り経路の追加}\label{sec:app_returnroute}
+
+\section{特徴量の値を使用した各点の明度の変更}\label{sec:app_transfer}
+
+\subsection{閾値との比較による明度の変更}\label{sec:app_intensity}
+
+\ref{sec:app_surfacedescriptor}節に示した
+計算方法を用いて算出した各種特徴量と設定した閾値を比較し，
+明るさを調整することで，特徴点列を作成する．
+以下にアルゴリズムを示す．
+
+\begin{Algorithm}[h]{10cm}
+\caption{各頂点の明度の決定}
+\begin{algorithmic}[1]
+\FOR{全ての頂点}
+\IF{特徴量 $\geq$ 閾値}
+\STATE 明るめに描画
+\ELSE
+\STATE 暗めに描画
+\ENDIF
+\ENDFOR
+\end{algorithmic}
+\end{Algorithm}
+\vspace{1ex}
+
+この方法では，\textgt{図 \ref{fig:transfer_absolute}}(a)の青い部分のように
+特徴量の絶対値が大きくても，閾値より小さいと暗めに描画されてしまうことがある．
+特徴量の値をそのまま使用するか，
+絶対値を使用するかは対象のモデルによって異なると考えられるので，
+場合によっては次のように特徴量の絶対値を使用できるようにする．
+
+\vspace{-2ex}
+\begin{Algorithm}[h]{10cm}
+\caption{各頂点の明度の決定（絶対値使用）}
+\begin{algorithmic}[1]
+\FOR{全ての頂点}
+\IF{特徴量の絶対値 $\geq$ 閾値}
+\STATE 明るめに描画
+\ELSE
+\STATE 暗めに描画
+\ENDIF
+\ENDFOR
+\end{algorithmic}
+\end{Algorithm}
+
+{\renewcommand\arraystretch{1.2}
+\begin{figure}[H]
+\centering
+\vspace{3ex}
+\begin{tabular}{cccc}
+\begin{minipage}{0.1\hsize}
+\centering
+\includegraphics[width=12mm]{fig/color_regend1.eps}
+\end{minipage}
+\begin{minipage}{0.25\hsize}
+\centering
+\includegraphics[width=35mm]{fig/hand_mc.eps}
+\end{minipage}%\vspace{1ex}
+\begin{minipage}{0.25\hsize}
+\centering
+\includegraphics[width=35mm]{fig/hand_nonabs.eps}
+\end{minipage}
+\begin{minipage}{0.25\hsize}
+\centering
+\includegraphics[width=35mm]{fig/hand_abs.eps}
+\end{minipage} \\
+\begin{minipage}{0.1\hsize}
+\centering
+　　　　　
+\end{minipage}
+\begin{minipage}{0.25\hsize}
+\centering
+\textgt{\small{(a)}}
+\end{minipage}%\vspace{1ex}
+\begin{minipage}{0.25\hsize}
+\centering
+\textgt{\small{(b)}}
+\end{minipage}
+\begin{minipage}{0.25\hsize}
+\centering
+\textgt{\small{(c)}}
+\end{minipage}
+\end{tabular}
+\textgt{ \caption{handモデル\cite{Liris}において，特徴量と閾値を比較した場合と，
+特徴量の絶対値と閾値と比較した場合の特徴点列の結果．
+(a) 平均曲率のカラーマップ，
+(b) 特徴量と閾値0.1の比較，
+(c) 特徴量の絶対値と閾値0.1の比較．
+\label{fig:transfer_absolute}}}
+ %\vspace{1ex}
+\end{figure}
+}
+
+\section{Point Cloud Generator}\label{sec:app_simulator}
+\ref{sec:app_surfacedescriptor}節～\ref{sec:app_transfer}節で，
+物体の表面特徴量を利用して明度を決定した
+一筆書きデータを作成する方法について述べたが，
+LPSDを使用しながら点の明度や密度を決定するには
+たいへんな手間や時間がかかる．
+そこでコンピュータ上で事前評価を行い，
+LPSDに入力可能な，適切な点列データを生成するための専用ソフトウェアとして，
+Mac OS上で動作する
+Point Cloud Generatorを開発した（\textgt{図 \ref{fig:simulator_interface}}）．
+このソフトウェアは次に挙げる5つの機能をもつ．詳しい使用方法は付録Aにて解説する．
+
+\begin{itemize}
+\setlength{\itemindent}{-7pt}
+\setlength{\itemsep}{-3pt}
+\setlength{\labelwidth}{5zw}
+\item 3次元ポリゴンモデルのスケール変更機能\\
+LPSDで描画可能なサイズである$200\times200\times200$のサイズへスケール変更
+を行う．
+\item 3次元ポリゴンモデルからの表面特徴量算出機能\\
+\ref{sec:app_surfacedescriptor}節で説明した各種表面特徴量を算出する．
+\item シミュレーション機能\\
+スライダにて閾値を変化させることで，
+一筆書き点列における各点の明度や密度を変え，描画の事前評価を行う．
+またシミュレーション画面に対し，次に記す操作が可能である．
+	\begin{itemize}
+	\setlength{\itemsep}{-4pt}
+	\item 点で描画するモード／SRV-5000での描画の見えに近いモードの
+		切り替え
+	\item 透視投影モード／平行投影モードの切り替え
+	\item 明暗の反転
+	\item 視点から物体までの距離の変更
+	\item 物体の回転
+	\end{itemize}
+\item 最終的な描画ファイルの出力機能\\
+シミュレーションで決定した明度の情報をもつLPSD描画ファイルを出力する．
+\item ゲージを用いた描画の評価機能\\
+Coleらの手法\cite{Cole09}を応用した，ゲージを用いた評価実験を行う．
+\end{itemize}
+
+\begin{figure}[h]
+\vspace{2ex}
+	\centering
+	\includegraphics[width=10cm]{fig/PCG_interface.eps}
+	\textgt{\caption{Point Cloud Generatorのインタフェース\label{fig:simulator_interface}}}
+\end{figure}

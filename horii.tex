@@ -1,0 +1,306 @@
+\documentclass[10pt]{jreport}
+%
+%%%% 文中の欧文をPSフォントにするならコメントアウトを外す
+%\usepackage{times}
+%\usepackage[T1]{fontenc}
+%\normalfont
+%\usepackage{mathptm}
+%
+%%%% M2ならbachelorをmasterにする
+\usepackage{sty/master}
+\usepackage{sty/rsfs}
+\usepackage{float}
+%
+%
+%%%% dvipdfmなどを使うならuseDVIPDFMtrueにする
+\newif\ifuseDVIPDFM\useDVIPDFMfalse
+%
+%%%% hyperrefを使うとpdf中にハイパーリンクが作れるが，しおりなどがちゃん
+%%%% とできるようにするためには，W32TeXで有名な角藤さんが作られたout2uni
+%%%% (dvipdfmxの場合)やbkmk2uni (dvipsk，pdvipsを使う場合)を使う必要があ
+%%%% る(W32TeXでは使える．suzakuでも使用可能)
+\ifuseDVIPDFM
+%\usepackage[dvipdfm]{hyperref}
+\usepackage[dvipdfm]{graphicx}
+\else
+%\usepackage[dvips]{hyperref}
+\usepackage[dvips]{graphicx}
+\fi
+%
+
+%
+%%%% 図のhlineを太さ指定可能にするための呪文
+%%%% （\bhline{1.0pt}という感じで使用）
+\newcommand{\bhline}[1]{\noalign{\hrule height #1}}
+%
+
+%
+%%%% 図の位置調整をより強力に行うための呪文
+%%%% （\begin{figure}[H]という感じで使用）
+\floatstyle{plain}
+\newfloat{myalgo}{tbhp}{mya}
+\newenvironment{Algorithm}[2][tbh]%
+{\begin{myalgo}[#1]
+\centering
+\begin{minipage}{#2}
+\begin{algorithm}[H]}%
+{\end{algorithm}
+\end{minipage}
+\end{myalgo}}
+%
+
+%
+%%%% その他，諸々の必要なもの
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\usepackage{sty/jdummy}
+\usepackage{sty/mediabb}
+\usepackage{sty/algorithm}
+\usepackage{sty/algorithmic}
+%
+
+\begin{document}
+
+\title{物体の表面特徴量を用いた\\
+3次元ディスプレイデバイスのための\\リソースアウェア・レンダリング}
+\author{堀井 絵里}
+%%%% masterの場合，次の3行は無効
+\teacher{藤代 一成}
+\id{81020794}
+\date{\the\year 年2月5日}
+
+%%%% 表紙
+\thispagestyle{empty}	% ページ数をつけない
+\input{thesis_cover}		% 論文表紙読み込み
+\newpage
+
+%%%% アブストラクト
+\thispagestyle{empty}
+\input{abst}		% 日本語アブストラクト読み込み
+\newpage	
+\thispagestyle{empty}
+\input{abst_e}		% 英語アブストラクト読み込み
+\newpage
+
+%%%% 目次
+\pagenumbering{roman}           % ローマ数字のページナンバリング
+\tableofcontents                % 目次作成
+\listoffigures                  % 図一覧作成
+\listoftables                   % 表一覧作成
+\newpage
+\pagenumbering{arabic}          % アラビア数字のページナンバリング
+
+%%%% はじめに
+\input{chap-1}
+%%%% 従来の研究
+\input{chap-2}
+%%%% 本研究のアプローチ
+\input{chap-3}
+%%%% アルゴリズム
+\input{chap-4}
+%%%% 結果と評価
+\input{chap-5}
+%%%% 謝辞
+\input{thanks}
+
+%\bibliographystyle{jname4}
+%\bibliography{thesis}
+
+\begin{thebibliography}{55}
+\addcontentsline{toc}{chapter}{参考文献}% 追加
+
+\bibitem{Cipriano09}
+Cipriano, G., Phillips Jr., G., and Gleicher, M.:\,``Multi-Scale Surface Descriptors,"
+{\it IEEE Transactions on Visualization and Computer Graphics}, Volume\,15, Issue\,6,
+pp.\,1201-1208,
+November 2009.
+
+\bibitem{Cole09}
+Cole, F., Sanik, K., DeCarlo, D., Finkelstein, A., Funkhouser, T., Rusinkiewicz, S.,
+and Singh, M.:\,``How Well Do Line Drawings Depict Shape?"
+{\it ACM Transactions on Graphics}, Volume\,28, Issue\,3, Article No.\,28, 
+August 2009.
+
+\bibitem{Goldfeather04}
+Goldfeather, J. and Interrante, V.:\,``A Nobel Cubic-Order Algorithm for Approximating Principal
+Direction Vectors,"
+{\it ACM Transactions on Graphics}, Volume\,23, Issue\,1,
+pp.\,45-63,
+January 2004.
+
+\bibitem{Gumhold02}
+Gumhold, S.:\,
+``Maximum Entropy Light Source Placement,"
+in {\it Proc. IEEE Visualization '02},
+pp.\,275-282,
+November 2002.
+
+\bibitem{Interrante95}
+Interrante, V., Fuchs, H., and Pizer, S.:\,``Enhancing Transparent Skin Surfaces with
+Ridge and Valley Lines,"
+in {\it Proc. IEEE the 6th conference on Visualization '95},
+pp.\,52-59,
+October-November 1995.
+
+\bibitem{Ishikawa08}
+Ishikawa, H. and Saito, H.:\,``Point Cloud Representation of 3D Shape for Laser- 
+Plasma Scanning 3D Display,"
+in {\it Proc. 34th Annual Conference of the IEEE Industrial Electronics Society},
+pp.\,1913-1918,
+November 2008.
+
+\bibitem{Ishikawa08_2}
+Ishikawa, H. and Saito, H.:\,``Closed-Line Based Representation of 3D Shape for Point Cloud for
+Laser-Plasma Scanning 3D Display,"
+in {\it Proc. 18th International Conference on Artificial Reality and Telexistence},
+pp.\,28-35,
+December 2008.
+
+\bibitem{Ishikawa09}
+Ishikawa, H. and Saito, H.:\,``Billboard Representaion for Laser-Plasma Scanning 3D Display,"
+in {\it Proc. ASIAGRAPH 2009},
+pp.\,41-46,
+October 2009.
+
+\bibitem{Itti03}
+Itti, L., Dhavale, N., and Pighin, F.:\,
+``Realistic Avatar Eye and Head Animation Using a
+Neurobiological Model of Visual Attention,"
+in {\it Proc. SPIE},
+pp.\,64-78,
+August 2003.
+
+\bibitem{Kimura06}
+Kimura, H., Uchiyama, T., and Yoshikawa, H.:\,``Laser Produced 3D Display in the Air,"
+{\it ACM SIGGRAPH 2006 Emerging Technologies},
+August 2006.
+
+\bibitem{Kolomenkin08}
+Kolomenkin, M., Shimshoni, I., and Tal, A.:\,``Demarcating Curves for Shape Illustration,"
+{\it ACM Transactions on Graphics}, Volume\,27, Issue\,5, Article No.\,157, 
+December 2008.
+
+\bibitem{Lee05}
+Lee, C. H., Varshney, A., and Jacobs, D. W.:\,``Mesh Saliency,"
+{\it ACM Transactions on Graphics}, Volume\,24, Issue\,3,
+pp.\,659-666,
+July 2005.
+
+\bibitem{Meyer02}
+Meyer, M., Desbrun, M., Schr\"{o}der, P., and Barr, A. H.:\,``Discrete Differential-Geometry
+Operators for Triangulated 2-Manifolds,"
+in {\it Visualization and Mathematics III (Proc. of VisMath 2002)}, 
+pp.\,35-54,
+November 2002.
+
+\bibitem{Miller94}
+Miller, G.:\,``Efficient  Algorithms for Local and Global Accessibility Shading,"
+in {\it Proc. SIGGRAPH 94},
+pp.\,319-326,
+August 1994.
+
+\bibitem{Otsuka06}
+Otsuka, R., Hoshino, T., and Horry, Y.:\,``Transpost: A Novel Approach to the
+Display and Transmission of 360 Degrees-Viewable 3D Solid Images,"
+{\it IEEE Transactions on Visualization and Computer Graphics}, Volume\,12, Issue\,2,
+pp.\,178-185,
+March-April 2006.
+
+\bibitem{Saito08}
+Saito, H., Kimura, H., Shimada, S., Naemura, T., Kayahara, J., Jarusirisawad, S., Nozick, V.,
+Ishikawa, H., Murakami, T., Aoki, J., Asano, A., Kimura, T., Kaehata, M., Sasaki, F.,
+Yashiro, H., Mori, M., Torizuka, K., and Ino, K.:\,
+``Laser-Plasma Scanning 3D Display for Putting Digital Contents
+in Free Space,"
+in {\it Proc. SPIE Stereoscopic Displays and Applications XIX},
+pp.\,680309:1-10,
+January 2008.
+
+\bibitem{Taubin95}
+Taubin, G.:\,``Estimating the Tensor of
+Curvature of a Surface from a Polyhedral Approximation,"
+in {\it Proc. IEEE International Conference on Computer Vision}, 
+pp.\,902-907,
+June 1995.
+
+\bibitem{Ishikawa10}
+市川 尋代：
+空間表示3Dディスプレイにおけるコンテンツ描画に関する研究，
+{\it 慶應義塾大学理工学研究科博士論文}，
+2010年5月．
+
+\bibitem{Inada91}
+稲田 修一：
+三次元映像，
+昭晃堂，
+1991年7月．
+
+\bibitem{Eura96}
+江浦 由佳，藤代 一成：
+「Tangent Sphere Accessibilityにもとづくエイジング効果のレンダリング」，
+情報処理学会研究報告 96-CG-81，
+pp.\,79-84，1996年8月.
+
+\bibitem{Okoshi91}
+大越 孝敬：
+三次元画像工学，
+朝倉出版，
+1991年7月．
+
+\bibitem{Sakurai10}
+櫻井 良昭：
+デザイナの意図を考慮した線描法の提案，
+{\it 慶應義塾大学理工学研究科修士論文}，
+2010年3月．
+
+\bibitem{Fujishiro11}
+藤代 一成：
+「3次元ディスプレイのためのリソースアウェア・レンダリング」，
+日本色彩学会視覚情報基礎研究会第8回研究発表会論文集，招待講演CSA--FVI--2011-1， 
+pp.\,3--5，
+2011年6月．
+
+\bibitem{Eizojyoho08}
+本田 捷夫，奥井 誠人，高木 康博，河北 真宏，吉川 浩，陶山 史朗：
+「立体映像技術」，
+映像情報メディア学会誌，Volume\,62，No.\,8，pp.\,1262-1265，
+2008年8月．
+
+\bibitem{Stereoscopic}
+吉田 隆：
+立体視テクノロジー　―次世代立体視技術の最前線―，
+株式会社エヌ・ティー・エス，
+2008年10月．
+
+\bibitem{Shichokaku}
+淀川 英司，東倉 洋一，中根 一成：
+視聴覚の認知科学，
+電子情報通信学会，
+1998年3月．
+
+\bibitem{Assembla}
+Assembla, https://subversion.assembla.com/svn/ezshade/trunk/code/geom/teapot.obj
+
+\bibitem{FormAssembly}
+FormAssembly, https://app.formassembly.com/
+
+\bibitem{Liris}
+Liris -- A Benchmark for 3D Mesh Watermarking, http://liris.cnrs.fr/meshbenchmark/
+
+\bibitem{Turbo}
+TurboSquid, http://www.turbosquid.com/
+
+\end{thebibliography}
+
+\input{kokaibunken}
+
+
+%%%% 付録 A
+\newpage
+\pagenumbering{arabic}           % アラビア数字のページナンバリング
+\def\thepage{A--\arabic{page}}		% ページ数をA-1. A-2,... と表示
+\appendix	
+\input{chap-a}
+
+
+\end{document}

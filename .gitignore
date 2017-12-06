@@ -1,0 +1,12 @@
+#不要なファイル
+_not_use/
+macros/
+sty/
+*.aux
+*.dvi
+*.lof
+*.log
+*.lot
+*.toc
+Makefile
+thesis_original.pdf
