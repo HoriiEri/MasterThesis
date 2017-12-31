@@ -2,6 +2,7 @@
 _not_use/
 macros/
 sty/
+original/
 *.aux
 *.dvi
 *.lof

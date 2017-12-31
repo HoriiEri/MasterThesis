@@ -3,21 +3,57 @@
 
 \vspace{2ex}
 
-{\bf {\large Title}}
+{\bf {\large An Object-Space Anti-Aliasing Method\\for High-Quality Shadowing of Hair-Shaped Objects}}
 \end{center}
 
 \vspace{3ex}
 
 \parindent 0.4 in
-
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
-
+%コンピュータの処理速度が向上したことで，高品質な画像の高速な描画が可能となった． 
+Recent improvement in CPU and GPU performance made it possible to render high-quality computer graphics in real time.
+%
+%この影響により，ゲームや映像をユーザが高品質なまま編集できる技術が発達している．
+Accordingly, technologies to edit video games or movies with nearly-final quality previews have been developed.
+%
+%このような技術の台頭やITの発達で，コンピュータ上に仮想の社会や人間をつくる技術が注目を集めている．
+With support of such rapid growth of CG technology as well as other IT developments, it has begun attracting much attention from related researchers and practitioners to construct realistic and dynamic virtual societies and humans on a modern computer.
+%
+%しかし人間のパーツは目や肌，髪の毛のようにやわらかい，小さい，半透明といった特徴をもつパーツが多く，コンピュータには簡単に描画できないものが多い．
+However, making virtual humans is a very difficult task because they are made up of many soft, small or transparent parts such as skin, \textbf{hairs} or eyes.
+%
+%特に頭髪は人間にとって重要なパーツでありながら，その複雑さが原因で高速な描画が難しい物体として知られている．
+Especially, human hairs are well-known as intricate objects which require much executing time to render and cause \textbf{aliasing}, even though they are essential parts of humans.
+%
+%また頭髪状物体が落とす影も同様に，一般的な描画手法を使うとちらつきやありえない濃度の影が生じるため，計算が難しい描画対象として知られている．
+Shadows cast from hairs are also known as difficult objects to render because they generate aliasing and too far dense shadows with commonly-used shadowing methods.\par
+%
+%頭髪は半透明で，かつ細長い円筒の集合であり，頭髪の形状，位置や視点，照明に変化がある場合，影を描画する際にちらつきが生じる．
+Hairs are \textbf{semi-transparent} and can be presented as mass of thin cylinders, but this style of geometric modeling causes aliasing to rendered shadows when users update a shape or a position of hair, camera angle and/or the position of lights.
+%
+%このちらつきのうち，頭髪が半透明で遮蔽判定が難しいことによるちらつきは，影を描く場所に光が届くまでに通過する頭髪密度の積算値を使い影を描くことで解決できる．
+As for a type of aliasing caused by difficulty to detect occlusion due to the transparency of hairs, even previous shadowing methods can decrease it by calculating the accumulated \textbf{amount of density values of all hairs} that light goes through.
+%
+%一方，髪が細すぎてコンピュータが髪を認識できないことによるちらつきは，投影後にちらつきが生じている部分と周囲の色を平均化して抑制されてきた．しかしこの平均化処理は，結果の品質は投影後の単位面積あたりの画素数に依存してしまう．
+On the other hand, aliasing caused by the problem that a computer cannot recognize too-thin hairs could be alleviated by image-space post-processing such as neighboring pixel averaging, though the quality depends strongly on the density of projected pixels.\par
+%
+%そこで本論文では，頭髪の密度を積算する既存手法を拡張して，大きさが可変で不透明度分布をもつ正方形小板で頭髪を近似することにより，結果の品質が画素数に依存しないアンチエイリアシング手法を提案する．
+Therefore, this thesis proposes an object-space method which realizes resolution-independent \textbf{anti-aliasing}. The method is an extension of the previous shadowing method that calculates the accumulated amount of density values of hairs, and \textbf{approximates a three-dimensional shape of hair} as a cloud of variable-size square splats with concentric opacity distribution.
+%
+%これに加えて既存研究では積極的に行われてこなかった，出力画像の定量的な品質評価をするために新たな評価方法を作成した．
+In this study, a novel evaluation method was also proposed to compare the extent of antialiasing in a quantitative manner.
+%
+%この評価方法を使用して既存手法と提案手法の出力画像の品質を比較した結果，提案手法は計算速度を大きく減少させることなく効果的にちらつきを抑制できることを確認した．
+Comparison based on the novel evaluation method revealed that the proposed method outperforms the existing image-space anti-aliasing with minimum loss of computational speed.
+%
+%Malik High quality computer graphics can be rendered in real time because the performance of current CPUs and GPUs has highly improved lately. Now users can directly create video games or movies with a quality on par with commercial products. As a result of this rapid growth, it allowed creators to consider making virtual humans on the computer. However, making virtual humans is an extremely difficult task for computers because they are made up of a lot of soft, small or transparent parts such as eyes, skin or hairs. In particular, human hairs are well-known as intricate objects, which cause, among other factors, aliasing and increasing complexity. Shadows cast from hairs are also known as difficult objects, which also generate aliasing and far too dense shadows with commonly used shadowing methods.\\
+% 
+%In this paper, we focus our attention to the shadow of hairs, which are vital to human animation, but are not easy to be accompanied by their stable shadows. Temporal-aliasing artifacts could be alleviated by image-space post-processing such as neighboring pixel averaging, though the quality depends strongly on the density of projected pixels. We therefore propose an object-space anti-aliasing method by approximating the 3D shape of hair with a cloud of variable-size square splats with concentric opacity distribution. Empirical evaluation revealed that the proposed method outperforms the existing image-space anti-aliasing with minimum loss of computational speed.
 \vspace{4ex}
 
 \noindent
 {\bf Keywords}
 
 \noindent
-Aaaaa; bbbbb; ccccc.
+Hair; real-time rendering; anti-aliasing; object space; semi-transparent objects.
  
 \parindent 1zw
