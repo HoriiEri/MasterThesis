@@ -1,6 +1,7 @@
 #不要なファイル
 _not_use/
 macros/
+reference/
 sty/
 original/
 *.aux
