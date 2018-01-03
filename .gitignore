@@ -4,6 +4,7 @@ macros/
 reference/
 sty/
 original/
+template/
 *.aux
 *.dvi
 *.lof
