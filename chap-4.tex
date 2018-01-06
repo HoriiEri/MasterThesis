@@ -3,7 +3,7 @@
 本章では，3章で紹介した手法によって自動生成した吹奏アニメーションについて記述する．
 \secref{sec:system}では仕様したPCやシステムの仕様を述べ，
 \secref{sec:result}では自動生成した吹奏アニメーションのキャプチャリング画像を示す．
-そして\secref{sec:review}では自動生成結果を実際の演奏シーンや既存の吹奏アニメーションと比較することにより，提案手法を評価する．
+そして\secref{sec:review}では，自動生成結果を実際の演奏シーンや既存の吹奏アニメーションと比較することにより，提案手法を評価する．
 
 \section{実行環境} \label{sec:system}
 事前にUnreal Engineにて専用のプロジェクトを作成し，モーションのデータが記載されているUnreal Engine専用のファイルをインポートする．
@@ -11,7 +11,7 @@
 なお，最初にインポートするUnreal Engine専用のファイルには，キャラクタの姿勢データも存在するため，
 キャラクタの姿勢のセッティングは容易にできる．\\
 \indent
-実行環境は\tabref{tab:pc}の通りである．
+実装環境は\tabref{tab:pc}の通りである．
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=14cm]{fig/chap4/ue4.eps}
@@ -21,7 +21,7 @@
 
 \begin{table}[htbp] 
 	\begin{center}
-		\caption{実行環境}
+		\caption{実装環境}
 		\label{tab:pc}
 		\begin{tabular}{|l|c|}
 			\hline
@@ -33,75 +33,84 @@
 	\end{center}
 \end{table}
 
-\section{アニメーション生成結果} \label{sec:result}
-本研究で作成したアニメーションは，主に少人数編成であるアンサンブルアニメーションである．
-以下では，トランペット奏者2名で演奏するアニメーションのキャプチャリング画像と，
-トランペット奏者2名，トロンボーン奏者2名の計4名で演奏するアニメーションのキャプチャリング画像を示す．
-以下，それぞれについて制御している口元やボーンの制御について説明するが，
-前者のアニメーションは，トランペット奏者の口元や指元がズームインされているシーンであるため，主に口元や指元のボーンの制御について，
-後者のアニメーションは全体を俯瞰しているシーンであるため，前者のアニメーションにて述べなかったボーンの制御について記述する．\\
+\section{アニメーション自動生成結果} \label{sec:result}
+本節では，自動生成したトランペット奏者2名で演奏するアンサンブルアニメーションと，トランペット奏者2名，トロンボーン奏者2名の計4名で演奏するアンサンブルアニメーションのキャプチャリング画像を示し，自動生成結果について述べる．
+以下，2つのアニメーションそれぞれについて，制御している口元やボーンを示すが，
+前者のアニメーションは，トランペット奏者の口元や指元がズームインされているため，主に口元や指元のボーンの制御について，
+後者のアニメーションは全体を俯瞰しているシーンであるため，前者のアニメーションにて触れなかったボーンの制御について記述する．\\
 \indent
-\figref{anim1}は，トランペット奏者2名の基本姿勢である．
-\begin{figure}[h]
+まず，トランペット奏者2名でのアンサンブルアニメーションの自動生成結果について述べる．
+\figref{fig:anim1}は，基本姿勢である．
+\begin{figure}[!h]
 	\centering
 	\includegraphics[width=10cm]{fig/chap4/anim1.eps}
 	\caption{トランペット奏者2名の基本姿勢}
 	\label{fig:anim1}
 \end{figure}
-トランペット奏者は，\figref{anim1_finger}のように指でトランペットのピストンを押す．
-\begin{figure}[h]
+\\
+トランペットを演奏する際は，\figref{fig:anim1_finger}のように指でピストンを操作する．
+\begin{figure}[!h]
 	\centering
 	\includegraphics[width=10cm]{fig/chap4/anim1_finger.eps}
 	\caption{トランペット奏者がピストンを押す様子}
 	\label{fig:anim1_finger}
 \end{figure}
-息継ぎをするタイミングでは，演奏者は\subfigref{fig:zoom}{fig:breath}のように口を開ける．
-また，高音を演奏するタイミングでは，\subfigref{fig:zoom}{fig:high}のように口元が緊張する．
-\begin{figure}[t]
+\\
+%\newpage
+息継ぎをするタイミングでは，演奏者は\subfigref{fig:zoom}{fig:zoom_breath}のように口を開ける．
+また，高音を演奏するタイミングでは，\subfigref{fig:zoom}{fig:zoom_high}のように口元が緊張する．
+\vspace{-2mm}
+\begin{figure}[h]
 	\centering
-	\subcaptionbox{\textgt{通常の口元の様子}
-		\label{fig:default}}[0.75\linewidth]{
-		\includegraphics[height=5.5cm]{fig/chap4/anim1_zoom.eps}}
 	\subcaptionbox{\textgt{息継ぎをしている様子}
-		\label{fig:breath}}[0.6\linewidth]{
-		\includegraphics[height=5.5cm]{fig/chap4/anim1_zoom_breath.eps}}
+		\label{fig:zoom_breath}}[0.45\linewidth]{
+		\includegraphics[width=5.5cm]{fig/chap4/anim1_zoom_breath.eps}}
 	\subcaptionbox{\textgt{高い音を演奏し口元が緊張している様子}
-		\label{fig:high}}[0.6\linewidth]{
-		\includegraphics[height=5.5cm]{fig/chap4/anim1_zoom_high.eps}}
+		\label{fig:zoom_high}}[0.45\linewidth]{
+		\includegraphics[width=5.5cm]{fig/chap4/anim1_zoom_high.eps}}
+	\subcaptionbox{\textgt{通常の口元の様子}
+		\label{fig:zoom_default}}[0.45\linewidth]{
+		\includegraphics[width=5.5cm]{fig/chap4/anim1_zoom.eps}}
 	\caption{演奏者の口元}
 	\label{fig:zoom}
 \end{figure}
-\figref{anim2}は，トランペット奏者2名，トロンボーン奏者2名の基本姿勢である．
+\\
+\indent
+次に，トランペット奏者2名，トロンボーン奏者2名でのアンサンブルアニメーションの自動生成結果について述べる．
+\figref{fig:anim2}は，基本姿勢である．
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=10cm]{fig/chap4/anim2.eps}
+	\includegraphics[width=13cm]{fig/chap4/anim2.eps}
 	\caption{トランペット奏者2名とトロンボーン奏者2名の基本姿勢}
 	\label{fig:anim2}
 \end{figure}
-トロンボーン奏者は，\figref{anim2_zoom}のように右手でスライドを動かす．
+\newpage
+トロンボーンを演奏する際は，\figref{fig:anim2_slide}のように右手でスライドを操作する．
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=10cm]{fig/chap4/anim2_slide.eps}
-	\caption{トロンボーン奏者がピストンを動かす様子}
-	\label{fig:anim2_zoom}
+	\includegraphics[width=13cm]{fig/chap4/anim2_slide.eps}
+	\caption{トロンボーン奏者がスライドを動かす様子}
+	\label{fig:anim2_slide}
 \end{figure}
+\\
 曲の入りでは，タイミングを合わせるために，膝を使って楽器を縦に振る．
-\figref{anim2_down}は，膝を曲げ，楽器を下に向けた瞬間の様子である．
+\figref{fig:anim2_down}は，膝を曲げ，楽器を下に向けた瞬間の様子である．
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=10cm]{fig/chap4/anim2_down.eps}
+	\includegraphics[width=13cm]{fig/chap4/anim2_down.eps}
 	\caption{曲の入りを合わせるために膝を使い楽器を下に向けた瞬間の様子}
 	\label{fig:anim2_down}
 \end{figure}
+\\
 息継ぎをするタイミングでは，演奏者は身体を反らす．
-\figref{anim2_breath}のは，トランペット奏者2名が息継ぎをしている瞬間の様子である．
+\figref{fig:anim2_breath}は，トランペット奏者2名が息継ぎをしている瞬間の様子である．
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=10cm]{fig/chap4/anim2_breath.eps}
-	\caption{息継ぎしている瞬間の様子}
+	\includegraphics[width=13cm]{fig/chap4/anim2_breath.eps}
+	\caption{息継ぎをする際に身体を反らしている様子}
 	\label{fig:anim2_breath}
 \end{figure}
-
+\newpage
 \section{評価} \label{sec:review}
 自動生成した吹奏アニメーションに対して，以下の3つの評価を行った．
 \begin{itemize}
@@ -109,56 +118,56 @@
 	\item 既存のアニメーションとの比較による評価
 	\item アンサンブルアニメーションの評価
 \end{itemize}
-以下，評価結果を，吹奏楽やオーケストラ経験者，吹奏楽やオーケストラ未経験者に分けて示す．
+以下，評価結果を，吹奏楽やオーケストラ経験者の回答と，吹奏楽やオーケストラ未経験者の回答に分けて示す．
 
 \subsection{実際の演奏シーンとの比較による評価}
-トランペット奏者やトロンボーン奏者が実際に演奏しているシーンと，自動生成した吹奏アニメーションを比較してもらい，以下の2項目についてアンケートをとった．
+トランペット奏者やトロンボーン奏者が実際に演奏しているシーンと，自動生成した吹奏アニメーションを比較することによる評価を，以下の2項目について行った．
 \begin{itemize}
 	\item 指や腕の動きは再現できているか
 	\item 演奏している雰囲気はあるか
 \end{itemize}
 その結果をに示す．
-\begin{figure}[t]
+\begin{figure}[h]
 	\centering
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ経験者の回答}
-		\label{fig:unity}}{
-		\includegraphics[width=6cm]{fig/chap4/Q1_tp1.eps}}
+		\label{fig:Q1-1tp}}{
+		\includegraphics[width=7cm]{fig/chap4/Q1_tp1.eps}}
 	\hspace{2mm}
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ未経験者の回答}
-		\label{fig:tp}}{
-		\includegraphics[width=6cm]{fig/chap4/Q1_tp2.eps}}
+		\label{fig:Q1-2tp}}{
+		\includegraphics[width=7cm]{fig/chap4/Q1_tp2.eps}}
 	\caption{トランペット奏者の指の動きは再現できているか}
 	\label{fig:Q1-tp}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[h]
 	\centering
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ経験者の回答}
-		\label{fig:unity}}{
+		\label{fig:Q1-1tb}}{
 		\includegraphics[width=7cm]{fig/chap4/Q1_tb1.eps}}
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ未経験者の回答}
-		\label{fig:tp}}{
+		\label{fig:Q1-2tb}}{
 		\includegraphics[width=7cm]{fig/chap4/Q1_tb2.eps}}
 	\caption{演奏アニメーションが不自然であると感じることがあるかどうか}
 	\label{fig:Q1-tb}
 \end{figure}
 
 \subsection{既存のアニメーションとの比較による評価}
-既存の吹奏アニメーションにおける，トランペット奏者やトロンボーン奏者が実際に演奏しているシーンと，自動生成した吹奏アニメーションを比較してもらい，以下の2項目についてアンケートをとった．
+既存の吹奏アニメーションにおける，トランペット奏者やトロンボーン奏者が実際に演奏しているシーンと，自動生成した吹奏アニメーションを比較することによる評価を，以下の2項目について行った．
 \begin{itemize}
 	\item 指や腕の動きは，どちらの方が音楽のリズムに合っているか
 	\item 自動生成した吹奏アニメーションの，キャラクタの身体の動きは自然か
 \end{itemize}
 その結果を\figref{fig:Q2-tp}に示す．
-\begin{figure}[t]
+\begin{figure}[h]
 	\centering
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ経験者の回答}
-		\label{fig:unity}}{
-		\includegraphics[width=6cm]{fig/chap4/Q1_tp1.eps}}
+		\label{fig:Q2-1tp}}{
+		\includegraphics[width=7cm]{fig/chap4/Q1_tp1.eps}}
 	\hspace{2mm}
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ未経験者の回答}
-		\label{fig:tp}}{
-		\includegraphics[width=6cm]{fig/chap4/Q1_tp2.eps}}
+		\label{fig:Q2-2tp}}{
+		\includegraphics[width=7cm]{fig/chap4/Q1_tp2.eps}}
 	\caption{指や腕の動きは，どちらの方が音楽のリズムに合っているか}
 	\label{fig:Q2-tp}
 \end{figure}
@@ -166,10 +175,10 @@
 \begin{figure}[t]
 	\centering
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ経験者の回答}
-		\label{fig:unity}}{
+		\label{fig:Q2-1tb}}{
 		\includegraphics[width=7cm]{fig/chap4/Q1_tb1.eps}}
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ未経験者の回答}
-		\label{fig:tp}}{
+		\label{fig:Q2-2tb}}{
 		\includegraphics[width=7cm]{fig/chap4/Q1_tb2.eps}}
 	\caption{自動生成した吹奏アニメーションの，キャラクタの身体の動きは自然か}
 	\label{fig:Q2-tb}
@@ -182,29 +191,29 @@
 	\item 自動生成した吹奏アニメーションの，キャラクタの身体の動きは自然か
 \end{itemize}
 その結果を\figref{fig:Q2-tp}に示す．
-\begin{figure}[t]
+\begin{figure}[h]
 	\centering
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ経験者の回答}
-		\label{fig:unity}}{
-		\includegraphics[width=6cm]{fig/chap4/Q1_tp1.eps}}
+		\label{fig:Q3-1tp}}{
+		\includegraphics[width=7cm]{fig/chap4/Q1_tp1.eps}}
 	\hspace{2mm}
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ未経験者の回答}
-		\label{fig:tp}}{
-		\includegraphics[width=6cm]{fig/chap4/Q1_tp2.eps}}
+		\label{fig:Q3-2tp}}{
+		\includegraphics[width=7cm]{fig/chap4/Q1_tp2.eps}}
 	\caption{指や腕の動きは，どちらの方が音楽のリズムに合っているか}
-	\label{fig:Q2-tp}
+	\label{fig:Q3-tp}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[h]
 	\centering
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ経験者の回答}
-		\label{fig:unity}}{
+		\label{fig:Q3-1tb}}{
 		\includegraphics[width=7cm]{fig/chap4/Q1_tb1.eps}}
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ未経験者の回答}
-		\label{fig:tp}}{
+		\label{fig:Q3-2tb}}{
 		\includegraphics[width=7cm]{fig/chap4/Q1_tb2.eps}}
 	\caption{自動生成した吹奏アニメーションの，キャラクタの身体の動きは自然か}
-	\label{fig:Q2-tb}
+	\label{fig:Q3-tb}
 \end{figure}
 
 \subsection{システムの有用性の予想}
