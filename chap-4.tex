@@ -1,7 +1,7 @@
 \chapter{結果と評価}
 \label{chap:results}
 本章では，3章で紹介した手法によって自動生成した吹奏アニメーションについて記述する．
-\secref{sec:system}では仕様したPCやシステムの仕様を述べ，
+\secref{sec:system}ではシステムの仕様や使用したPCについて述べ，
 \secref{sec:result}では自動生成した吹奏アニメーションのキャプチャリング画像を示す．
 そして\secref{sec:review}では，自動生成結果を実際の演奏シーンや既存の吹奏アニメーションと比較することにより，提案手法を評価する．
 
@@ -15,7 +15,7 @@
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=14cm]{fig/chap4/ue4.eps}
-	\caption{Unreal Engineの初期設定}
+	\caption{Unreal Engineの初期設定画面}
 	\label{fig:ue4}
 \end{figure}
 
@@ -36,8 +36,8 @@
 \section{アニメーション自動生成結果} \label{sec:result}
 本節では，自動生成したトランペット奏者2名で演奏するアンサンブルアニメーションと，トランペット奏者2名，トロンボーン奏者2名の計4名で演奏するアンサンブルアニメーションのキャプチャリング画像を示し，自動生成結果について述べる．
 以下，2つのアニメーションそれぞれについて，制御している口元やボーンを示すが，
-前者のアニメーションは，トランペット奏者の口元や指元がズームインされているため，主に口元や指元のボーンの制御について，
-後者のアニメーションは全体を俯瞰しているシーンであるため，前者のアニメーションにて触れなかったボーンの制御について記述する．\\
+前者のアニメーションでは，トランペット奏者の口元や指元がズームインされているため，主に口元や指元のボーンの制御に，
+後者のアニメーションでは，全体を俯瞰しているシーンであるため，前者のアニメーションにて触れなかったボーンの制御に触れる．\\
 \indent
 まず，トランペット奏者2名でのアンサンブルアニメーションの自動生成結果について述べる．
 \figref{fig:anim1}は，基本姿勢である．
@@ -71,7 +71,7 @@
 	\subcaptionbox{\textgt{通常の口元の様子}
 		\label{fig:zoom_default}}[0.45\linewidth]{
 		\includegraphics[width=5.5cm]{fig/chap4/anim1_zoom.eps}}
-	\caption{演奏者の口元}
+	\caption{演奏者の口元の様子}
 	\label{fig:zoom}
 \end{figure}
 \\
@@ -107,7 +107,7 @@
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=13cm]{fig/chap4/anim2_breath.eps}
-	\caption{息継ぎをする際に身体を反らしている様子}
+	\caption{息継ぎ時に身体を反らしている様子}
 	\label{fig:anim2_breath}
 \end{figure}
 \newpage
@@ -120,6 +120,7 @@
 \end{itemize}
 以下，評価結果を，吹奏楽やオーケストラ経験者の回答と，吹奏楽やオーケストラ未経験者の回答に分けて示す．
 
+\newpage
 \subsection{実際の演奏シーンとの比較による評価}
 トランペット奏者やトロンボーン奏者が実際に演奏しているシーンと，自動生成した吹奏アニメーションを比較することによる評価を，以下の2項目について行った．
 \begin{itemize}
