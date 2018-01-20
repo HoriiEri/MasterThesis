@@ -3,7 +3,7 @@
 
 \vspace{2ex}
 
-{\bf {\large An Object-Space Anti-Aliasing Method\\for High-Quality Shadowing of Hair-Shaped Objects}}
+{\bf {\large BAND: Blowing Animation created from Natural motions synchronized with Digital music}}
 \end{center}
 
 \vspace{3ex}
@@ -11,56 +11,56 @@
 \parindent 0.4 in
 
 %音楽演奏をテーマにしたアニメーションはたくさんある．
-There are a lot of animation with the theme of music performance.
+There exist a lot of animation with the theme of music performance.
 %
 %テレビで放映されたアニメーションの例は，『のだめカンタービレ』，『けいおん！』，『響け！ユーフォニアム』である．
 An example of animation aired on television are "Nodame Cantabile", "K-ON!", and "Hibike! Euphonium".
 %
 %これらのアニメーションの制作方法は，セル画や3DCGである．そして，いずれも実際の演奏者の動きに近い演奏シーンが生成されている．
-These animation production methods are cell images or 3D CG, and each performance animation is close to actual performer's movement.
+Even though the production methods of these series are different, all of them focus on generating realistic movements of actual performers.
+%These animation production methods are cell images or 3D CG, and each performance animation is close to actual performer's movement.
 %
 %楽器の輝きや形状なども忠実に再現されている．
-The glow and shape of the instrument are faithfully reproduced.
+The shine and shape of the instruments are faithfully reproduced.
 %
-%しかし，楽器を演奏するキャラクタの運指や身体の動きに注目すると，音楽と動きが完全に同期されていないことがあり，違和感を感じる．
-However, pay attention to the performer's fingering and mvoement, 
-sometimes it is not completely synchronized with music and gives a sense of incompatibility.
+%しかし，楽器を演奏するキャラクタの運指や身体の動きが，音楽に完全に同期されていないことがある．
+However, sometimes the performer's fingering and movement　are not completely synchronized with music and gives a sense of incompatibility.
 %
 %特に速いフレーズや，複雑なリズムを演奏するシーンで，このようなアーティファクトが起きやすい．
-This type of artifact is occur especially in a scene that plays a fast phrase or a complex rhythm.
+This type of artifact occurs especially in a scene that plays a fast phrase or a complex rhythm.
 %
 %また，表情からも不自然さを感じることがある．
-Also, occasionally the facial expression is unnatural.
+Also, occasionally facial expressions in animation series are unnatural.
 %
-%これらの違和感や不自然さを解消するためには，身体の動きを1つずつ音階やリズムなどに，手動で合わせる必要がある．
-In order to eliminate these discomfort and unnaturalness, 
-it is necessary to manually synchronize the movement of the body one by one to the scale, rhythm, and so on.
+%これらの違和感を解消するためには，身体の動きを1つずつ音階やリズムなどに，手動で合わせる必要がある．
+In order to eliminate these discomfort, 
+it is necessary to manually synchronize the movement of the body one by one with the scale, rhythm, and so on.
 %
 %この方法は効率が悪く，多くの時間と労力が必要となる．
 This method is inefficient, so much time and effort are required.\\
 \indent
 %
 %上記の課題を解決するため，鍵盤楽器や弦楽器を演奏する演奏者のアニメーションを，音源から自動生成する研究が存在する．
-In order to solve this problem, there are works to automatically generate animations of performers playing keyboard instruments and stringed instruments from sound sources.
+In order to solve these issues, there are works to automatically generate animation of performers playing keyboard instruments and stringed instruments from sound sources.
 %
 %しかし，管楽器を対象とした研究は存在しない．
-However, there are no works targeting wind instruments.
+However, as far as we know, there are no works targeting wind instruments.
 %
-%そこで本論文では，管楽器を演奏するキャラクタの吹奏アニメーションを，音源から自動生成することを目指す．
-Therefore, in this paper, we aim to automatically generate blowing animation of characters playing wind instruments from sound sources.
+%そこで本研究では，管楽器を演奏するキャラクタの吹奏アニメーションを，音源から自動生成することを目指した．
+Therefore, in this work, we aimed to automatically generate blowing animation of characters playing wind instruments from sound sources.
 %
-%より具体的には，実際の演奏アニメーション制作フローに沿わせるため，楽曲は電子楽器を用いて，MIDI音源として生成する．
-More specifically, in order to follow the actual musical performance animation production flow, music is generated as a MIDI sound source using an electronic musical instrument.
+%アニメータの作業支援を目的とするため，自動生成の流れは実際の演奏アニメーション制作フローに沿わせた．
+For the purpose of animator's work assistance, Animation was generated in accordance with the actual animation production flow of musical performance.
+%
+%より具体的には，楽曲は電子楽器を用いて，MIDI音源として生成する．
+More specifically, the sound sources is generated as a MIDI sound source using an electronic musical instrument.
 %
 %次に，作成した楽曲を解析することにより，音楽の情報を得る．
-Next, by analyzing the generated music, we obtain music information.
+Next, we analyze the generated sound source to obtain music information.
 %
-%
+%最後に，得られた情報をキャラクタの身体の動きや表情，そして管楽器に適用することにより，音源に同期した自然な吹奏アニメーションを実現した．
 Finally, by applying the obtained information to the character's movement, facial expression, 
-and wind instruments, natural blowing animation synchronized with the sound source is generated.
-%
-%また，提案手法の対象ユーザはアニメータである．
-Also, the target user of the proposed method is an animator.\\
+and wind instruments, we generated natural blowing animation synchronized with the sound source.\\
 \indent
 %
 %自動生成したアニメーションについて評価を行った結果，提案手法により，自然なアニメーションを自動的に生成できることを確認した．

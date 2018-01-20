@@ -1,0 +1,25 @@
+一応thesis.tex内に組み入れるのを想定して作りました。
+使用例としては以下の通り。
+
+～～～～
+%%%% masterの場合，次の3行は無効
+\teacher{藤代 一成}
+\id{81420627}
+\date{2015年3月}
+
+↓↓↓↓この部分を追記↓↓↓↓
+%%%% 回答書
+\iftrue
+%\iffalse
+\pagestyle{empty}
+\input{response_to_reviewers}
+\newpage
+\fi
+↑↑↑↑ここまで↑↑↑↑
+
+%%%% 表紙
+\thispagestyle{empty}	% ページ数をつけない
+\input{thesis_cover}		% 論文表紙読み込み
+\newpage
+～～～～
+

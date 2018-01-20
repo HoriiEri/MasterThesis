@@ -1,0 +1,164 @@
+\documentclass[10pt]{jreport}
+%
+%%%% 文中の欧文をPSフォントにするならコメントアウトを外す
+%\usepackage{times}
+%\usepackage[T1]{fontenc}
+%\normalfont
+%\usepackage{mathptm}
+%
+%%%% M2ならbachelorをmasterにする
+\usepackage{sty/master}
+\usepackage{sty/rsfs}
+\usepackage{float}
+%
+%
+%%%% dvipdfmなどを使うならuseDVIPDFMtrueにする
+\newif\ifuseDVIPDFM\useDVIPDFMfalse
+%
+%%%% hyperrefを使うとpdf中にハイパーリンクが作れるが，しおりなどがちゃん
+%%%% とできるようにするためには，W32TeXで有名な角藤さんが作られたout2uni
+%%%% (dvipdfmxの場合)やbkmk2uni (dvipsk，pdvipsを使う場合)を使う必要があ
+%%%% る(W32TeXでは使える．suzakuでも使用可能)
+\usepackage[dvipdfmx]{graphicx}
+
+%
+
+%
+%%%% 図のhlineを太さ指定可能にするための呪文
+%%%% （\bhline{1.0pt}という感じで使用）
+\newcommand{\bhline}[1]{\noalign{\hrule height #1}}
+%
+
+%
+%%%% 図の位置調整をより強力に行うための呪文
+%%%% （\begin{figure}[H]という感じで使用）
+\floatstyle{plain}
+\newfloat{myalgo}{tbhp}{mya}
+\newenvironment{Algorithm}[2][tbh]%
+{\begin{myalgo}[#1]
+\centering
+\begin{minipage}{#2}
+\begin{algorithm}[H]}%
+{\end{algorithm}
+\end{minipage}
+\end{myalgo}}
+%
+%
+%キャプション再定義
+%
+%
+%%%% その他，諸々の必要なもの
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\usepackage{sty/jdummy}
+\usepackage{mediabb}
+\usepackage{sty/algorithm}
+\usepackage{sty/algorithmic}
+\usepackage{subcaption}
+\usepackage{bm}
+\usepackage[dvipdfmx]{color}
+\usepackage{subcaption}
+\captionsetup[sub]{margin=5pt}
+%
+%
+%マクロ再定義
+%
+%
+% キャプションをすべてゴシック体に変更
+\makeatletter
+
+\long\def\@makecaption#1#2{
+  \advance\leftskip1cm
+  \advance\rightskip1cm
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{{\bf #1}\hskip1zw{\gt #2}}%
+  \ifdim \wd\@tempboxa >\hsize
+    {\bf #1}\hskip1zw{\gt #2}\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+
+\makeatother
+%
+% subcaptionで定義した場合の子ラベルを読み込んでくれるマクロ．
+% \subfigref{図のキャプション}{サブキャプション}で図1(a)のように出力．
+\def\subfigref#1#2{\textgt{図\,\ref{#1}(\subref{#2})}}
+%
+%
+%
+%
+%\usepackage[dvipdfmx]{hyperref}
+%\usepackage{pxjahyper}
+%
+\begin{document}
+	
+\title{音源に同期する運指および表情に注目した\\
+	吹奏アニメーションの自動生成}
+\author{堀井 絵里}
+%%%% masterの場合，次の3行は無効
+\teacher{藤代 一成}
+\id{81621728}
+\date{\the\year 年2月5日}
+
+%%%% 回答書（最終提出版では削除）
+\iftrue
+%\iffalse
+\pagestyle{empty}
+\input{response/response_to_reviewers}
+\newpage
+\fi
+
+%%%% 表紙
+\pagenumbering{Alph}
+\thispagestyle{empty}	% ページ数をつけない
+\input{thesis_cover}		% 論文表紙読み込み
+\newpage
+
+%%%% アブストラクト
+\thispagestyle{empty}
+\input{abst}		% 日本語アブストラクト読み込み
+\newpage	
+\thispagestyle{empty}
+\input{abst_e}		% 英語アブストラクト読み込み
+\newpage
+
+%%%% 目次
+\pagenumbering{roman}           % ローマ数字のページナンバリング
+\tableofcontents                % 目次作成
+\listoffigures                  % 図一覧作成
+\listoftables                   % 表一覧作成
+\newpage
+\pagenumbering{arabic}          % アラビア数字のページナンバリング
+
+%%%% はじめに
+\input{chap-1}
+%%%% 従来の研究
+\input{chap-2}
+%%%% 本研究のアプローチ
+\input{chap-3}
+%%%% アルゴリズム
+\input{chap-4}
+%%%% 結果と評価
+\input{chap-5}
+%%%% 謝辞
+\input{thanks}
+
+\input{kokaibunken}
+\input{sankoubunken}
+
+%\renewcommand{\refname}{参考文献}
+%\bibliographystyle{macros/IEEEtran}
+%\bibliography{thesis}
+
+%%%% 付録 A
+%\newpage
+%\pagenumbering{arabic}           % アラビア数字のページナンバリング
+%\def\thepage{A--\arabic{page}}		% ページ数をA-1. A-2,... と表示
+%\appendix	
+%\input{chap-a}
+
+
+\end{document}
+

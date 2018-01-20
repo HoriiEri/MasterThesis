@@ -37,7 +37,7 @@
 この2本の楽器は，吹奏楽ではとくに目立つ楽器であり，また3Dモデルが入手しやすかったために選んだ．
 
 \section{デバイス} \label{sec:device}
-MIDI音源を生成するために，電子楽器であるウインドシンセサイザ「EWI5000」(\figref{fig:ewi})を使用する．
+MIDI音源を生成するために，電子楽器であるウインドシンセサイザ「EWI5000」(\figref{fig:ewi})を使用した．
 このウインドシンセサイザは，さまざまな楽器の音を再現することが可能である．
 \begin{figure}[h]
 	\centering
@@ -55,9 +55,9 @@ MIDI音源を生成するために，電子楽器であるウインドシンセ�
 \end{figure}
 \secref{sec:device}で述べたウインドシンセサイザは，単音しか鳴らすことができないため，シングルチャンネルの音源しか生成することができない．
 しかし，吹奏アニメーションを自動生成するためには，複数名で演奏しているマルチチャンネルの音源が必要となる．
-そこで，ウインドシンセサイザで生成したMIDI音源を，フリーソフトウェアであるMIDIシーケンスソフトウェア「Domino」(\figref{fig:domino})\cite{domino}へ出力し，重ねて何度も録音することにより，マルチチャンネルの音源を生成する．\\
+そこで，ウインドシンセサイザで生成したMIDI音源を，フリーソフトウェアであるMIDIシーケンスソフトウェア「Domino」(\figref{fig:domino})\cite{domino}へ出力し，重ねて何度も録音することにより，マルチチャンネルの音源を生成した．\\
 \indent
-また，アニメーションの生成には，Epic Gamesより開発されたゲームエンジン，Unreal Engine\cite{ue4}を用いる.
+また，アニメーションの生成には，Epic Gamesより開発されたゲームエンジン，Unreal Engine\cite{ue4}を用いた.
 
 \section{3Dモデル} \label{sec:3Dmodel}
 使用する3Dモデルは，
@@ -212,8 +212,8 @@ MIDIは，チャンクとよばれるデータブロックから構成され，�
 \indent
 息継ぎをするときは口元だけでなく，上半身も動く．
 そこで，前項で述べたタイミングで，
-息継ぎのモーション\subfigref{fig:breath_motion}{fig:breath_up}，
-息継ぎの予備モーション\subfigref{fig:breath_motion}{fig:breath_down}を行う．
+息継ぎのモーション（\subfigref{fig:breath_motion}{fig:breath_up}），
+息継ぎの予備モーション（\subfigref{fig:breath_motion}{fig:breath_down}）を行う．
 なお，比較対象として通常の直立状態を\subfigref{fig:breath_motion}{fig:breath_default}に示す．差が分かりづらい場合は，楽器と床の端との位置関係を見てほしい．\\
 \begin{figure}[!h]
 	\centering
