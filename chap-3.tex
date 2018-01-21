@@ -7,7 +7,7 @@
 \secref{sec:3Dmodel}にて使用する3Dモデルについて述べる．
 \secref{sec:analysis}にてMIDIデータから音情報への変換方法，
 \secref{sec:adapt}にて音情報のモーションへの適用方法を説明する．
-そして最後に，\secref{sec:howto}にて実際にシステムを使用する際の，使用方法について言及する．
+そして最後に，\secref{sec:howto}にて実際にシステムを使用する際の使用方法に言及する．
 
 \section{自動生成の流れ} \label{sec:flow}
 \figref{fig:flow}に，音源から吹奏アニメーションを自動生成する流れを示す．\\
@@ -61,8 +61,7 @@ MIDI音源を生成するために，電子楽器であるウインドシンセ�
 
 \section{3Dモデル} \label{sec:3Dmodel}
 使用する3Dモデルは，
-ユニティちゃん(\subfigref{fig:model}{fig:unity})，トランペット(\subfigref{fig:model}{fig:tp})，トロンボーン(\subfigref{fig:model}{fig:tb})である．
-それぞれ，\cite{unity}，\cite{tp}，\cite{tb}からダウンロードした．
+ユニティちゃん(\subfigref{fig:model}{fig:unity}\cite{unity})，トランペット(\subfigref{fig:model}{fig:tp}\cite{tp})，トロンボーン(\subfigref{fig:model}{fig:tb}\cite{tb})である．
 なお，ユニティちゃんのライセンス条約は，webサイト\cite{license}にて確認済みである．
 \begin{figure}[h]
 	\centering
@@ -126,7 +125,7 @@ MIDIは，チャンクとよばれるデータブロックから構成され，�
 \vspace{5mm}
 この例の場合，ドを240クロック分伸ばすことを意味する．以降，この値をデルタタイムとよぶ．
 %デルタタイムを楽譜の情報に直すには，本節の冒頭で述べたタイムベース値を用いる．
-最後に，このクロックを現実時間[s]に変換する．変換式は\eqref{eq:eq1}で表される．\\
+最後に，このクロックを現実時間[s]に変換する．変換式は式\eqref{eq:eq1}で表される．\\
 \begin{equation}
 \label{eq:eq1}
 時間[s] = 
@@ -239,7 +238,7 @@ MIDIは，チャンクとよばれるデータブロックから構成され，�
 アンサンブルアニメーションを自動生成する際は，全員に異なるパラメタをランダムで割り当てることにより，個人差を表現する．
 ここで，アンサンブルとは複数名で演奏することを意味し，一般的には少人数で演奏することをさす．
 アンサンブルには指揮者が存在しないため，曲の始まりは，リードを担当する演奏者が楽器や身体で合図をする．
-なお，重心移動や合図のモーションは，同研究室学士4年の武内が担当した．
+なお，重心移動や合図のモーションは，武内が担当した．
 %音情報から一意に定義可能なモーションは堀井．\\
 
 \section{提案手法の使用方法} \label{sec:howto}

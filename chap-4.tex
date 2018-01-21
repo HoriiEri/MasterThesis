@@ -118,8 +118,12 @@
 	\item 既存のアニメーションとの比較による評価
 	\item アンサンブルアニメーションの評価
 \end{itemize}
-以下，評価結果を，(a)吹奏楽・オーケストラ団体への所属経験者または金管楽器（主にトランペット，トロンボーン，ホルン，ユーフォニアム，チューバ）経験者10名の回答，(b)(a)にはあてはまらない楽器経験者13名の回答，(c)楽器未経験者9名の回答に分けて示す．
-
+以下，評価結果を，\secref{sec:background}と同様に以下の3グループに分けて示す．
+\begin{description}
+	\item[(a)] 吹奏楽・オーケストラ団体への所属経験者または金管楽器（主にトランペット，トロンボーン，ホルン，ユーフォニアム，チューバ）経験者：12名
+	\item[(b)] (a)にはあてはまらない楽器経験者：16名
+	\item[(c)] 楽器未経験者：14名
+\end{description}
 \newpage
 \subsection{実際の演奏シーンとの比較による評価}
 トランペット奏者やトロンボーン奏者が実際に演奏しているシーンと，自動生成した吹奏アニメーションを比較することによる評価を，以下の4項目について行った．
@@ -132,80 +136,109 @@
 \vspace{5mm}
 \par
 \figref{fig:Q1-1}は，トランペット奏者の指の動きが再現できているか否かを評価した結果である．
-吹奏楽やオーケストラ団体への所属経験や楽器の経験に関わらず，提案手法に対して肯定的な回答をした者がほとんどであり，否定的な回答をした者はいなかった．
+いずれのグループも，提案手法に対して肯定的な回答をした者がほとんどであり，否定的な回答をした者はいなかった．
 \begin{figure}[!h]
 	\centering
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ団体への所属経験者または金管楽器経験者の回答}
 		\label{fig:Q1-1-1}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q1-1-1.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q1-1-1.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{(a)にはあてはまらない楽器経験者の回答}
 		\label{fig:Q1-1-2}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q1-1-2.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q1-1-2.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{楽器未経験者の回答}
 		\label{fig:Q1-1-3}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q1-1-3.eps}}
-	\caption{トランペット奏者の指の動きは再現できているか}
+		\includegraphics[width=4cm]{fig/chap4/Q1-1-3.eps}}
+	\caption{トランペット奏者の指の動きは再現できているか\\
+		（{\color{legend1}■}：再現できている，
+		{\color{legend2}■}：どちらかといえば再現できている，
+		{\color{legend3}■}：どちらともいえない，
+		{\color{legend4}■}：どちらかといえば再現できていない，
+		{\color{legend5}■}：再現できていない）}
 	\label{fig:Q1-1}
 \end{figure}
-\vspace{5mm}
+\newpage
 \par
 \figref{fig:Q1-2}は，トランペット奏者の身体の動きが自然か否かを評価した結果である．
-吹奏楽やオーケストラ団体への所属経験や楽器の経験に関わらず，提案手法に対して否定的な回答をした者の比率が高かった．
-特に，楽器未経験者の比率が高かった．
+いずれのグループも，提案手法に対して否定的な回答をした者の比率が高かった．
 \begin{figure}[!h]
 	\centering
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ団体への所属経験者または金管楽器経験者の回答}
 		\label{fig:Q1-2-1}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q1-2-1.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q1-2-1.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{(a)にはあてはまらない楽器経験者の回答}
 		\label{fig:Q1-2-2}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q1-2-2.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q1-2-2.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{楽器未経験者の回答}
 		\label{fig:Q1-2-3}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q1-2-3.eps}}
-	\caption{トランペット奏者の身体の動きは自然か}
+		\includegraphics[width=4cm]{fig/chap4/Q1-2-3.eps}}
+	\caption{トランペット奏者の身体の動きは自然か\\
+		（{\color{legend1}■}：自然である，
+		{\color{legend2}■}：どちらかといえば自然である，
+		{\color{legend3}■}：どちらともいえない，
+		{\color{legend4}■}：どちらかといえば不自然である，
+		{\color{legend5}■}：不自然である）}
 	\label{fig:Q1-2}
 \end{figure}
-\newpage
+%\newpage
+\vspace{5mm}
 \par
 \figref{fig:Q1-3}は，トロンボーン奏者の腕の動きが再現できているか否かを評価した結果である．
-吹奏楽やオーケストラ団体への所属経験者や金管楽器奏者は，全員提案手法に対して肯定的な回答をした．
-また，上記にあてはまらない者も，大半が肯定的な回答をした．
+吹奏楽やオーケストラ団体への所属経験者や金管楽器奏者は，全員提案手法に対して肯定的な回答をし，否定的な回答をした者はいなかった．
+また，その他のグループも，大半が肯定的な回答をした．
 \begin{figure}[!h]
 	\centering
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ団体への所属経験者または金管楽器経験者の回答}
 		\label{fig:Q1-3-1}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q1-3-1.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q1-3-1.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{(a)にはあてはまらない楽器経験者の回答}
 		\label{fig:Q1-3-2}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q1-3-2.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q1-3-2.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{楽器未経験者の回答}
 		\label{fig:Q1-3-3}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q1-3-3.eps}}
-	\caption{トロンボーン奏者の腕の動きは再現できているか}
+		\includegraphics[width=4cm]{fig/chap4/Q1-3-3.eps}}
+	\caption{トロンボーン奏者の腕の動きは再現できているか\\
+		（{\color{legend1}■}：再現できている，
+		{\color{legend2}■}：どちらかといえば再現できている，
+		{\color{legend3}■}：どちらともいえない，
+		{\color{legend4}■}：どちらかといえば再現できていない，
+		{\color{legend5}■}：再現できていない）}
 	\label{fig:Q1-3}
 \end{figure}
-\vspace{5mm}
+\newpage
+%\vspace{5mm}
 \par
 \figref{fig:Q1-4}は，トロンボーン奏者の身体の動きが自然か否かを評価した結果である．
-提案手法に対して肯定的な回答をした者も否定的な回答をした者も，半数以下という結果になった．
-また，楽器経験者より楽器未経験者の方が，肯定的な回答をした者の比率が高かった．
+提案手法に対して肯定的な回答をした者も否定的な回答をした者も，それぞれのグループにおいて半分以下という結果になった．
 \begin{figure}[!h]
 	\centering
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ団体への所属経験者または金管楽器経験者の回答}
 		\label{fig:Q1-4-1}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q1-4-1.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q1-4-1.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{(a)にはあてはまらない楽器経験者の回答}
 		\label{fig:Q1-4-2}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q1-4-2.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q1-4-2.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{楽器未経験者の回答}
 		\label{fig:Q1-4-3}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q1-4-3.eps}}
-	\caption{トロンボーン奏者の身体の動きは自然か}
+		\includegraphics[width=4cm]{fig/chap4/Q1-4-3.eps}}
+	\caption{トロンボーン奏者の身体の動きは自然か\\
+		（{\color{legend1}■}：自然である，
+		{\color{legend2}■}：どちらかといえば自然である，
+		{\color{legend3}■}：どちらともいえない，
+		{\color{legend4}■}：どちらかといえば不自然である，
+		{\color{legend5}■}：不自然である）}
 	\label{fig:Q1-4}
 \end{figure}
 %
-%\newpage
+\newpage
+%\vspace{5mm}
 \subsection{既存のアニメーションとの比較による評価}
 既存の吹奏アニメーションにおける，トランペット奏者やトロンボーン奏者が実際に演奏しているシーンと，自動生成した吹奏アニメーションを比較することによる評価を，以下の4項目について行った．
 \begin{itemize}
@@ -214,60 +247,84 @@
 	\item トロンボーン奏者の腕の動きは，どちらの方がより音楽のリズムに合っているか
 	\item トロンボーン奏者の身体の動きは，どちらの方がより自然か
 \end{itemize}
+%\newpage
 \vspace{5mm}
 \par
 \figref{fig:Q2-1}は，既存のアニメーションと自動生成したアニメーションを比較したときに，トランペット奏者の指の動きはどちらの方がより音楽のリズムに合っているのかを評価した結果である．
-吹奏楽やオーケストラ団体への所属経験や楽器の経験に関わらず，提案手法に対して肯定的な回答をした者が半数以上であった．
+いずれのグループも，半分以上が提案手法に対して肯定的な回答をした．
 特に，吹奏楽やオーケストラ団体への所属経験者や金管楽器奏者は，ほとんどが肯定的な回答をした．
 \begin{figure}[!h]
 	\centering
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ団体への所属経験者または金管楽器経験者の回答}
 		\label{fig:Q2-1-1}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q2-1-1.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q2-1-1.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{(a)にはあてはまらない楽器経験者の回答}
 		\label{fig:Q2-1-2}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q2-1-2.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q2-1-2.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{楽器未経験者の回答}
 		\label{fig:Q2-1-3}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q2-1-3.eps}}
-	\caption{既存のアニメーションと自動生成したアニメーションを比較したときに，トランペット奏者の指の動きは，どちらの方がより音楽のリズムに合っているか}
+		\includegraphics[width=4cm]{fig/chap4/Q2-1-3.eps}}
+	\caption{既存のアニメーションと自動生成したアニメーションを比較したときに，トランペット奏者の指の動きは，どちらの方がより音楽のリズムに合っているか\\
+		（{\color{legend1}■}：自動生成したアニメーション，
+		{\color{legend2}■}：どちらかといえば自動生成したアニメーション，
+		{\color{legend3}■}：どちらともいえない，
+		{\color{legend4}■}：どちらかといえば既存のアニメーション，
+		{\color{legend5}■}：既存のアニメーション）}
 	\label{fig:Q2-1}
 \end{figure}
-\vspace{5mm}
+\newpage
+%\vspace{5mm}
 \par
 \figref{fig:Q2-2}は，既存のアニメーションと自動生成したアニメーションを比較したときに，トランペット奏者の身体の動きはどちらの方がより自然なのかを評価した結果である．
-提案手法に対して肯定的な回答をした者はおらず，半数以上が否定的な回答をした．
+提案手法に対して肯定的な回答をした者の割合は小さく，どのグループも半数以上が否定的な回答をした．
 \begin{figure}[!h]
 	\centering
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ団体への所属経験者または金管楽器経験者の回答}
 		\label{fig:Q2-2-1}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q2-2-1.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q2-2-1.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{(a)にはあてはまらない楽器経験者の回答}
 		\label{fig:Q2-2-2}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q2-2-3.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q2-2-2.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{楽器未経験者の回答}
 		\label{fig:Q2-2-3}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q2-2-3.eps}}
-	\caption{既存のアニメーションと自動生成したアニメーションを比較したときに，トランペット奏者の身体の動きは，どちらの方がより自然か}
+		\includegraphics[width=4cm]{fig/chap4/Q2-2-3.eps}}
+	\caption{既存のアニメーションと自動生成したアニメーションを比較したときに，トランペット奏者の身体の動きは，どちらの方がより自然か\\
+		（{\color{legend1}■}：自動生成したアニメーション，
+		{\color{legend2}■}：どちらかといえば自動生成したアニメーション，
+		{\color{legend3}■}：どちらともいえない，
+		{\color{legend4}■}：どちらかといえば既存のアニメーション，
+		{\color{legend5}■}：既存のアニメーション）}
 	\label{fig:Q2-2}
 \end{figure}
-\newpage
+%\newpage
+\vspace{5mm}
 \par
 \figref{fig:Q2-3}は，既存のアニメーションと自動生成したアニメーションを比較したときに，トロンボーン奏者の腕の動きはどちらの方がより音楽のリズムに合っているのかを評価した結果である．
-吹奏楽やオーケストラ団体への所属経験や楽器の経験に関わらず，提案手法に対して肯定的な回答をした者が半数以上であった．
-\figref{fig:Q2-1}とは異なり，肯定的な回答をした者の比率は，吹奏楽やオーケストラ団体への所属経験や楽器の経験によらなかった．
+いずれのグループも，半分以上が提案手法に対して肯定的な回答をした．
+また\figref{fig:Q2-1}とは異なり，肯定的な回答をした者の比率は，吹奏楽やオーケストラ団体への所属経験や楽器の経験に依存しなかった．
 \begin{figure}[!h]
 	\centering
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ団体への所属経験者または金管楽器経験者の回答}
 		\label{fig:Q2-3-1}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q2-3-1.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q2-3-1.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{(a)にはあてはまらない楽器経験者の回答}
 		\label{fig:Q2-3-2}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q2-3-2.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q2-3-2.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{楽器未経験者の回答}
 		\label{fig:Q2-3-3}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q2-3-3.eps}}
-	\caption{既存のアニメーションと自動生成したアニメーションを比較したときに，トロンボーン奏者の腕の動きは，どちらの方が音楽のリズムに合っているか}
+		\includegraphics[width=4cm]{fig/chap4/Q2-3-3.eps}}
+	\caption{既存のアニメーションと自動生成したアニメーションを比較したときに，トロンボーン奏者の腕の動きは，どちらの方が音楽のリズムに合っているか\\
+		（{\color{legend1}■}：自動生成したアニメーション，
+		{\color{legend2}■}：どちらかといえば自動生成したアニメーション，
+		{\color{legend3}■}：どちらともいえない，
+		{\color{legend4}■}：どちらかといえば既存のアニメーション，
+		{\color{legend5}■}：既存のアニメーション）}
 	\label{fig:Q2-3}
 \end{figure}
 \vspace{5mm}
@@ -278,14 +335,21 @@
 	\centering
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ団体への所属経験者または金管楽器経験者の回答}
 		\label{fig:Q2-4-1}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q2-4-1.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q2-4-1.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{(a)にはあてはまらない楽器経験者の回答}
 		\label{fig:Q2-4-2}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q2-4-2.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q2-4-2.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{楽器未経験者の回答}
 		\label{fig:Q2-4-3}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q2-4-3.eps}}
-	\caption{既存のアニメーションと自動生成したアニメーションを比較したときに，トロンボーン奏者の身体の動きは，どちらの方がより自然か}
+		\includegraphics[width=4cm]{fig/chap4/Q2-4-3.eps}}
+	\caption{既存のアニメーションと自動生成したアニメーションを比較したときに，トロンボーン奏者の身体の動きは，どちらの方がより自然か\\
+		（{\color{legend1}■}：自動生成したアニメーション，
+		{\color{legend2}■}：どちらかといえば自動生成したアニメーション，
+		{\color{legend3}■}：どちらともいえない，
+		{\color{legend4}■}：どちらかといえば既存のアニメーション，
+		{\color{legend5}■}：既存のアニメーション）}
 	\label{fig:Q2-4}
 \end{figure}
 \newpage
@@ -295,58 +359,79 @@
 	\item 演奏時や息継ぎ時の口元は自然か
 	\item 全員でタイミングを合わせつつ演奏している雰囲気はあるか
 \end{itemize}
+\vspace{5mm}
 \par
 \figref{fig:Q3-1}は，演奏時や息継ぎ時の口元は自然か否かを評価した結果である．
-この項目については，金管楽器演奏者の口元の状態に関する知識のある者に対して評価を行ったため，回答者数はそれぞれ(a)9名，(b)9名，(c)7名となっている．
-吹奏楽やオーケストラ団体への所属経験や，楽器の経験に関わらず，提案手法に対して肯定的な回答をした者の比率は，否定的な回答をした者の比率よりも高かった．
+この項目については，金管楽器演奏者の口元の状態に関する知識のある者に対して評価を行ったため，回答者数はそれぞれ(a)10名，(b)10名，(c)9名となっている．
+いずれのグループも，提案手法に対して肯定的な回答をした者の比率は，否定的な回答をした者の比率よりも高かった．
 \begin{figure}[!h]
 	\centering
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ団体への所属経験者または金管楽器経験者の回答}
 		\label{fig:Q3-1-1}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q3-1-1.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q3-1-1.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{(a)にはあてはまらない楽器経験者の回答}
 		\label{fig:Q3-1-2}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q3-1-2.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q3-1-2.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{楽器未経験者の回答}
 		\label{fig:Q3-1-3}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q3-1-3.eps}}	
-	\caption{演奏時や息継ぎ時の口元は自然か}
+		\includegraphics[width=4cm]{fig/chap4/Q3-1-3.eps}}	
+	\caption{演奏時や息継ぎ時の口元は自然か\\
+		（{\color{legend1}■}：自然である，
+		{\color{legend2}■}：どちらかといえば自然である，
+		{\color{legend3}■}：どちらともいえない，
+		{\color{legend4}■}：どちらかといえば不自然である，
+		{\color{legend5}■}：不自然である）}
 	\label{fig:Q3-1}
 \end{figure}
-%\newpage
+\newpage
+%\vspace{5mm}
 \par
 \figref{fig:Q3-2}は，全員でタイミングを合わせつつ演奏している雰囲気があるか否かを評価した結果である．
-吹奏楽やオーケストラ団体への所属経験者または金管楽器経験者のなかには，提案手法に対して否定的な回答をした者が少数いたが，それ以外はいなかった．
-また，肯定的な回答をした者の比率は，吹奏楽やオーケストラ団体への所属経験や，楽器の経験がないほど高かった．
+吹奏楽やオーケストラ団体への所属経験者または金管楽器経験者のグループには，提案手法に対して否定的な回答をした者が少数いたが，それ以外のグループにはいなかった．
 \begin{figure}[!h]
 	\centering
 	\subcaptionbox{\textgt{吹奏楽・オーケストラ団体への所属経験者または金管楽器経験者の回答}
 		\label{fig:Q3-2-1}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q3-2-1.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q3-2-1.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{(a)にはあてはまらない楽器経験者の回答}
 		\label{fig:Q3-2-2}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q3-2-2.eps}}
+		\includegraphics[width=4cm]{fig/chap4/Q3-2-2.eps}}
+	\hspace{5mm}
 	\subcaptionbox{\textgt{楽器未経験者の回答}
 		\label{fig:Q3-2-3}}{
-		\includegraphics[width=4.8cm]{fig/chap4/Q3-2-3.eps}}	
-	\caption{全員でタイミングを合わせつつ演奏している雰囲気はあるか}
+		\includegraphics[width=4cm]{fig/chap4/Q3-2-3.eps}}	
+	\caption{全員でタイミングを合わせつつ演奏している雰囲気はあるか\\
+		（{\color{legend1}■}：ある，
+		{\color{legend2}■}：どちらかといえばある，
+		{\color{legend3}■}：どちらともいえない，
+		{\color{legend4}■}：どちらかといえばない，
+		{\color{legend5}■}：ない）}
 	\label{fig:Q3-2}
 \end{figure}
 %
-\newpage
+%\newpage
+\vspace{5mm}
 \subsection{システムの有用性の予想}
 アニメーション制作やCGに関する知識がある者15名に，本手法によりアニメーション制作時間や労力が軽減されると思うか否かを聞いた．
 その結果，\figref{fig:ans2}のような結果を得た．全員が肯定的な回答をし，そのうち13名が軽減されると思うと回答したことから，本手法により，アニメータの制作支援が可能であると考えられる．
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=6cm]{fig/chap4/Q1-1-1.eps}
-	\caption{アニメーション制作の労力や時間が軽減されると思うか否か}
+	\includegraphics[width=5cm]{fig/chap4/ans2.eps}
+	\caption{アニメーション制作の労力や時間が軽減されると思うか否か\\
+		（{\color{legend1}■}：軽減されると思う，
+		{\color{legend2}■}：多少は軽減されると思う，
+		{\color{legend3}■}：どちらともいえない，
+		{\color{legend4}■}：あまり軽減されないと思う，
+		{\color{legend5}■}：全く軽減されないと思う）}
 	\label{fig:ans2}
 \end{figure}
-
+\newpage
 \subsection{アンケート結果による本手法の総合的分析}
 指や腕の動きのように，音楽情報から一意に決まる動きに関しては，本手法により音源に同期した自然なアニメーションが作成可能であるといえる．
 一方，全身の動きのような個人差がある動きに関しては，現段階では本手法による自然なアニメーションが作成可能であるとはいえない結果となった．しかし，アニメータの作業支援は可能であると予想できる．\\
 \indent
 吹奏楽やオーケストラ団体への所属経験や楽器の経験がない者ほど，本手法に対して否定的な回答をした者の比率が高かった項目がある．
-その要因として，グループによって自然だと感じる演奏の動作が異なっていることが挙げられると考えられる．
+その要因として，グループによって自然であると感じる演奏の動作が異なっていることが挙げられると考えられる．
