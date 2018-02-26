@@ -1,0 +1,201 @@
+\chapter{結果と分析}
+\label{chap:results}
+本章では前章で作成した画像や動画を示し，その後既存手法のものと比較して定性的，定量的観点から手法を評価する．
+\section{実験環境}
+実験及び実装環境は\tabref{tab:pc}，\tabref{tab:environment}，\tabref{tab:3dmodel}のように設定した．
+コンピュータのCPUはメーカーから販売されている製品にも頻繁に採り入れられていたものであり，ネットサーフィン，ビジネスなどを含むごく一般的な用途に使用するようなコンピュータにはよく採用されているモデルである．グラフィックボードが搭載しているGPUであるGTX 650 Tiは本論文執筆時においては一般的なハイエンドではないがローエンドというほどでもないという位置付けのものである．処理のひじょうに重いコンピュータゲームでなければ，ほぼすべてのソフトウェアは起動可能なスペックである．RAMメモリは8GBであり，通常のメーカー製品などに採用されているメモリ容量である．今回使用したマシンはCGを扱う上では高い性能をもつものではないが，提案手法で目的としているユーザに対する即座のフィードバクを返す手法の場合には，このスペックで問題なく結果画像を描画できる必要がある．実装はプログラミング言語にC++を使用し，ライブラリとしては主にグラフィクスAPIであるOpenGL 4.3，行列計算用ライブラリであるglmを使用した．レンダリングに使用したモデルは二つあり，Hairball \cite{hairball}とNatural hair \cite{hairmodel}である．
+\begin{table}[h]
+\centering
+    \caption{使用PC}
+    \begin{tabular}{|c|c|} \hline
+        & PC \\ \hline \hline
+        OS & Windows 8.1 Enterprise 64bits \\ \hline
+        CPU & Intel Core i7-3770 3.4GHz \\ \hline
+        GPU & Nvidia GTX 650 Ti \\ \hline
+        メモリ & 8 GB \\ \hline
+    \end{tabular}
+    \label{tab:pc}
+\end{table}\\
+\begin{table}[h]
+\centering
+    \caption{実験環境}
+    \begin{tabular}{|c|} \hline
+        使用プログラミング言語：C++\\ \hline
+        主要API：OpenGL 4.3\\ \hline
+        各中間情報の記録に使用したマップサイズ：$512\times512$，$1,024\times1,024$\\ \hline
+        主要ライブラリ：GLUT，GLM\\ \hline
+    \end{tabular}
+    \label{tab:environment}
+\end{table}\\
+\begin{table}[h]
+\centering
+    \caption{使用3Dモデル}
+    \begin{tabular}{|c|c|c|} \hline
+        & Hairball & Natural hair\\ \hline \hline
+        公開者 & Williams College & C. Yuksel \\ \hline
+        頂点数 & 1,441,098 & 220,000 \\ \hline
+        三角メッシュ数 & 2,880,000 & 200,000 \\ \hline
+    \end{tabular}
+    \label{tab:3dmodel}
+\end{table}\\
+%
+\section{結果}
+\label{sec:result}
+3DモデルにHairballを使用してレンダリングした結果，\figref{fig:result_far}ような画像が得られた．左の画像では既存手法のDOMsを使用し，参照した論文に書かれていた通りグラフィックボードの設定からAAとしてMSAAを適用した．右の画像が提案手法によるものであり，既存のアンチエイリアシング手法は一切使用していない．提案手法は物体の大まかな形状を取得し，影を描画できることが確認できる．\par
+\figref{fig:result_enlarge}は，\figref{fig:result_far}の赤枠で囲まれた部分を拡大した画像である．提案手法では投影された影に含まれるエイリアシングの抑制を目的としているため，拡大した影に含まれているエイリアシングが問題となる．\\
+\begin{figure}[h]
+    \centering
+        \subcaptionbox{DOMs \label{fig:far_doms}}[0.49\linewidth]
+            {\includegraphics[height=6cm]{fig/sec4_result_far_doms1.png}}
+        \subcaptionbox{提案手法 \label{fig:far_ours}}[0.49\linewidth]
+            {\includegraphics[height=6cm]{fig/sec4_result_far_ours1.png}}
+
+    \caption{Hairballに対してDOMsと提案手法それぞれを適用して作成した影の遠景の出力画像の比較．}
+    \label{fig:result_far}
+\end{figure}\\
+\begin{figure}[h]
+    \centering
+        \subcaptionbox{DOMs \label{fig:near_doms}}[0.49\linewidth]
+            {\includegraphics[height=6cm]{fig/sec4_result_near_doms1.png}}
+        \subcaptionbox{提案手法 \label{fig:near_ours}}[0.49\linewidth]
+            {\includegraphics[height=6cm]{fig/sec4_result_near_ours1.png}}
+
+    \caption{DOMsと提案手法それぞれを使用して作成した\figref{fig:result_far}の拡大図の比較．}
+    \label{fig:result_enlarge}
+\end{figure}\\
+%
+\begin{figure}[htbp]
+  \centering
+    \includegraphics[width=14cm]{fig/sec4_change_parameter.png}
+    \caption{Hairballの影の描画に使うパラメータ$thickness$，$opacity$を変更した場合の描画結果．異なるパラメータを設定することで，提案手法は濃い色の影も薄い色の影も描画できる．}
+    \label{fig:result_change_parameter}
+\end{figure}\par
+拡大図では，既存手法ではぼかされた後のエイリアシングが各フレームで別の場所に現れるため，動画を確認した場合には点滅が確認できる．\secref{sec:analyze}では動画に現れるエイリアシングの量を定量的に測定し，紙面上でも提案手法の効果が確認できるように説明する．
+%
+\figref{fig:result_change_parameter}は影の濃度に関わるパラメータである$opacity$と，提案手法において髪の太さを表すパラメータである$thickness$を変更して影を描画した結果を並べたものである．
+
+この結果を見ると，提案手法はパラメータを変更することで様々な様子の影を描画することができ，薄い影などにも対応が可能であることが確認できる．
+また板ポリゴンに割り振る密度値を増加させて黒い領域の広い影を作ったとしても，個々の板ポリゴンの縁では滑らかに密度値が変化するため，影の縁にエイリアシングの少ない影を描画できる．これに加え，\figref{fig:yuksel_result_far}，\figref{fig:yuksel_result_enlarge}に示すNatural hairの描画結果はヘアボールと異なり密度に偏りがあるオブジェクトの描画結果であるが，こちらについても適切に描画できている様子が確認できる．%
+\begin{figure}[h]
+    \centering
+        \subcaptionbox{DOMs \label{fig:yuksel_far_doms}}[0.49\linewidth]
+            {\includegraphics[height=6cm]{fig/yuksel_doms_far.bmp}}
+        \subcaptionbox{提案手法 \label{fig:yuksel_far_ours}}[0.49\linewidth]
+            {\includegraphics[height=6cm]{fig/yuksel_far.bmp}}
+
+    \caption{Natural hairに対してDOMsと提案手法それぞれを適用して作成した影の遠景の出力画像の比較．}
+    \label{fig:yuksel_result_far}
+\end{figure}
+%
+\begin{figure}[h]
+    \centering
+        \subcaptionbox{DOMs \label{fig:yuksel_near_doms}}[0.49\linewidth]
+            {\includegraphics[height=6cm]{fig/yuksel_doms_near.bmp}}
+        \subcaptionbox{提案手法 \label{fig:yuksel_near_ours}}[0.49\linewidth]
+            {\includegraphics[height=6cm]{fig/yuksel_near.bmp}}
+
+    \caption{DOMsと提案手法それぞれを使用して作成した\figref{fig:yuksel_result_far}の拡大図の比較．}
+    \label{fig:yuksel_result_enlarge}
+\end{figure}\\
+%
+\section{分析}
+\label{sec:analyze}
+本節では提案手法と既存手法を比較する．
+提案手法ではDOMsが頭髪状物体の陰影を描画する際に外部の手法を採り入れていたAAに注目した．
+細長い頭髪はそれが落とす影にエイリアシングを発生させるため，AAをかける必要がある．
+計算速度の問題から既存のリアルタイムレンダリングにおけるAAでは，投影された後の影に処理を加え，エイリアシングを見えなくするような手法がとられてきた．
+しかし，投影済みの影を使う手法では完全なエイリアシングの除去はできないため，提案手法では影を投影する前にエイリアシングの原因を抑制する方法を提案した．
+ここでは提案手法が既存手法に比較してどれだけエイリアシングを抑制できているか，という点に注目して分析する．
+%
+\subsection{計算速度の比較}
+計算速度の比較では，シャドウマップ手法，OSMs，DOMs，提案手法の4つの手法を比較した．シャドウマップ手法ではAAを一切適用せず，OSMs，DOMsでは既存のAAを適用した．まず計算速度を比較したグラフを\figref{fig:speed}に示す．
+\begin{figure}[htb]
+  \centering
+    \includegraphics[width=10cm]{graph/sec4_speed.png}
+    \caption{シャドウマップ手法，OSMs，DOMs，提案手法で計算速度を比較したグラフ．}
+    \label{fig:speed}
+\end{figure}
+このグラフを見ると，DOMsに比較して提案手法は計算速度が低下しているが，毎秒30枚の画像を出力するために必要な条件である，1枚の画像作成時間が30msであるという条件は満たしている．
+%
+\subsection{品質の定量的な評価}
+エイリアシングの量を定量的に評価するために，ここではエイリアシングの測定方法も同時に提案する．画像の中で一部分の輝度が突然変化した場合に，人間はそれをエイリアシングと判定する．これは例えば画像の一部が黒から白又は白から黒に変化し，点滅した場合である．
+このような点滅がどの程度起きているかを測定するために，提案手法では以下のような手順でエイリアシング量$error$を測定した．\par
+\begin{itemize}
+\item[(1)] 出力画像の二値化．出力画像の各画素値を256段階で表し，閾値127として128以上は白（画素値255），127以下であれば黒（画素値0）とした．その後，時間的に連続して作成された二値化画像$I_a, I_b, I_c$を比較した．
+%
+\item[(2)] 画素値が周囲と不連続に点滅した画素のカウント．この処理では$I_a$で8近傍に黒がない画素$P$に注目した．$I_b$において，$P$と同じ位置の画素$P'$が黒であり，かつ$I_c$における同じ位置の画素$P''$が白であれば点滅していると判断し，$error$の値を1加算する．最終的に，既存手法と提案手法で計測した$error$の値を比較する．近傍画素が存在しない画像の周辺境界では，この計算は行わない．
+\end{itemize}
+%
+%
+このエイリアシング計測方法が問題なく機能するかを確認するため，予備実験を実施した．予備実験では，\figref{fig:yobi-image}に示した画像を用意し，エイリアシングを含まない例としてこの画像が表示され続ける動画と，エイリアシングを含む例として各フレームで画像が90度回転する動画に対して提案した測定手法を適用し，その計測結果を確認した．この予備実験の結果が，\figref{fig:yobi-result}のグラフである．このグラフからもわかるように，提案した測定手法はエイリアシングをもつ動画とそうでない動画を判別できることが確認された．
+%
+この測定手法を提案手法の結果に適用した結果を\figref{fig:result_shadow_map}から\figref{fig:result_ours3}で示す．この結果を見ると，提案手法では影を描画するためのパラメータを調整することでエイリアシング量を減らせることが確認できる．\\
+\begin{figure}[htb]
+  \centering
+    \includegraphics[width=5cm]{fig/sec4_yobi_image.png}
+    \caption{予備実験に使用したチェッカーボード画像．予備実験ではこの画像を変更しない動画と，フレームごとに90度回転させる動画でエイリアシング量を測定した．}
+    \label{fig:yobi-image}
+\end{figure}
+%
+\begin{figure}[htb]
+  \centering
+    \includegraphics[height=5cm]{fig/sec4_yobi_graph.png}
+    \caption{予備実験の結果を示したグラフ．}
+    \label{fig:yobi-result}
+\end{figure}
+%
+\begin{figure}[htb]
+        \subcaptionbox{Hairball ($512\times512$) \label{fig:hairball_shadowmap}}[0.45\linewidth]
+            {\includegraphics[height=4cm]{graph/g_shadowMap_repaired.bmp}}
+        \subcaptionbox{Natural hair ($1024\times1024$) \label{fig:naturalhair_shadowmap}}[0.45\linewidth]
+            {\includegraphics[height=4cm]{graph/cyhair_shadowMap.bmp}}
+
+    \caption{シャドウマップ手法を適用した場合のエイリアシング量の測定結果．}
+    \label{fig:result_shadow_map}
+\end{figure}
+%
+\newpage
+\begin{figure}[htb]
+    \centering
+    \includegraphics[height=0.5cm]{graph/label.bmp}
+\end{figure}
+%
+\begin{figure}[htb]
+        \subcaptionbox{Hairball ($512\times512$) \label{fig:hairball_doms}}[0.45\linewidth]
+            {\includegraphics[height=4cm]{graph/g_DOMs_repaired.bmp}}
+        \subcaptionbox{Natural hair ($1024\times1024$) \label{fig:naturalhair_doms}}[0.45\linewidth]
+            {\includegraphics[height=4cm]{graph/cyhair_DOMs.bmp}}
+
+    \caption{DOMsを適用した場合のエイリアシング量の測定結果．}
+    \label{fig:result_doms}
+\end{figure}
+%
+\begin{figure}[htb]
+        \subcaptionbox{Hairball ($512\times512$) \label{fig:hairball_ours1}}[0.45\linewidth]
+            {\includegraphics[height=4cm]{graph/g_thickness1_repaired.bmp}}
+        \subcaptionbox{Natural hair ($1024\times1024$) \label{fig:naturalhair_ours1}}[0.45\linewidth]
+            {\includegraphics[height=4cm]{graph/cyhair_OURs_1.bmp}}
+
+    \caption{提案手法において$thickness$を1にして実験した場合のエイリアシング量の測定結果．}
+    \label{fig:result_ours1}
+\end{figure}
+%
+\begin{figure}[htb]
+        \subcaptionbox{Hairball ($512\times512$) \label{fig:hairball_ours2}}[0.45\linewidth]
+            {\includegraphics[height=4cm]{graph/g_thickness2_repaired.bmp}}
+        \subcaptionbox{Natural hair ($1024\times1024$) \label{fig:naturalhair_ours2}}[0.45\linewidth]
+            {\includegraphics[height=4cm]{graph/cyhair_OURs_2.bmp}}
+
+    \caption{提案手法において$thickness$を2にして実験した場合のエイリアシング量の測定結果．}
+    \label{fig:result_ours2}
+\end{figure}
+%
+\begin{figure}[htb]
+        \subcaptionbox{Hairball ($512\times512$) \label{fig:hairball_ours3}}[0.45\linewidth]
+            {\includegraphics[height=4cm]{graph/g_thickness3_repaired.bmp}}
+        \subcaptionbox{Natural hair ($1024\times1024$) \label{fig:naturalhair_ours3}}[0.45\linewidth]
+            {\includegraphics[height=4cm]{graph/cyhair_OURs_3.bmp}}
+
+    \caption{提案手法において$thickness$を3にして実験した場合のエイリアシング量の測定結果．}
+    \label{fig:result_ours3}
+\end{figure}

@@ -5,6 +5,7 @@ reference/
 sty/
 original/
 template/
+thesis/
 *.aux
 *.dvi
 *.lof
